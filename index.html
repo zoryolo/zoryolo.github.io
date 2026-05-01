@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Los Tresoles | Casa Rural en Coín, Málaga</title>
+    <meta
+      name="description"
+      content="Casa rural Los Tresoles en Coín, Málaga. Alquiler vacacional con espacios amplios, entorno natural y escapadas en la Sierra de las Nieves."
+    />
+    <meta name="theme-color" content="#1e3a34" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#inicio">Saltar al contenido</a>
+
+    <header class="site-header" id="site-header">
+      <div class="shell nav-wrap">
+        <a href="#inicio" class="brand" aria-label="Ir al inicio">
+          <span class="brand-main">Los Tresoles</span>
+          <span class="brand-sub">Casa Rural</span>
+        </a>
+
+        <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="desktop-nav" aria-label="Navegación principal">
+          <a href="#casa">La casa</a>
+          <a href="#galeria">Galería</a>
+          <a href="#entorno">Entorno</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#contacto" class="pill">Contacto</a>
+        </nav>
+      </div>
+
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Navegación móvil" hidden>
+        <a href="#casa">La casa</a>
+        <a href="#galeria">Galería</a>
+        <a href="#entorno">Entorno</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="hero section">
+        <div class="hero-media" aria-hidden="true">
+          <img src="images/inicio1.png" alt="" class="hero-image is-active" />
+          <img src="images/lostressoles.png" alt="" class="hero-image" />
+          <img src="images/exterior1.png" alt="" class="hero-image" />
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="shell hero-content reveal">
+          <p class="eyebrow">Coín, Málaga</p>
+          <h1>Una casa rural con carácter y calma real</h1>
+          <p class="lead">
+            Los Tresoles combina diseño cálido, naturaleza cercana y ritmo lento. Perfecta para escapadas en familia,
+            con amigos o para teletrabajar lejos del ruido.
+          </p>
+          <div class="hero-actions">
+            <a href="#galeria" class="btn btn-primary">Ver galería</a>
+            <a href="#contacto" class="btn btn-ghost">Consultar disponibilidad</a>
+          </div>
+          <ul class="hero-metrics" aria-label="Datos clave de la casa">
+            <li><strong>6</strong><span>huéspedes</span></li>
+            <li><strong>3</strong><span>dormitorios</span></li>
+            <li><strong>2</strong><span>baños</span></li>
+            <li><strong>100%</strong><span>entorno natural</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section-soft" id="casa">
+        <div class="shell split">
+          <div class="reveal">
+            <p class="eyebrow">La casa</p>
+            <h2>Espacio amplio y experiencia acogedora</h2>
+            <p>
+              Cada zona está pensada para que la estancia sea cómoda desde el primer minuto: zonas comunes generosas,
+              habitaciones luminosas y exteriores que invitan a estar fuera.
+            </p>
+            <p>
+              No hay reservas online en esta web: es una página informativa para mostrar el alojamiento y facilitar
+              el contacto directo.
+            </p>
+          </div>
+          <div class="feature-grid reveal">
+            <article class="feature-card">
+              <h3>Zona Sol</h3>
+              <p>Espacios principales amplios para reuniones y descanso.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Zona Luna</h3>
+              <p>Dormitorios con luz natural y ambiente tranquilo.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Zona Estrella</h3>
+              <p>Rincones con identidad para desconectar y disfrutar.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Exterior</h3>
+              <p>Vistas abiertas y aire limpio en un entorno rural real.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="galeria">
+        <div class="shell reveal">
+          <p class="eyebrow">Galería</p>
+          <h2>Imágenes reales de Los Tresoles</h2>
+          <p class="section-copy">Pulsa cualquier imagen para verla en grande.</p>
+        </div>
+
+        <div class="shell gallery" id="gallery-grid">
+          <button class="gallery-item reveal" data-full="images/exterior1.png" data-caption="Fachada y entorno exterior">
+            <img src="images/exterior1.png" alt="Fachada y entorno exterior" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal tall" data-full="images/art1.png" data-caption="Detalle interior de la casa">
+            <img src="images/art1.png" alt="Detalle interior de la casa" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal" data-full="images/sol1.png" data-caption="Zona Sol">
+            <img src="images/sol1.png" alt="Zona Sol" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal" data-full="images/luna1.png" data-caption="Zona Luna">
+            <img src="images/luna1.png" alt="Zona Luna" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal wide" data-full="images/tressoles1.png" data-caption="Vista panorámica">
+            <img src="images/tressoles1.png" alt="Vista panorámica" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal" data-full="images/estrella1.png" data-caption="Zona Estrella">
+            <img src="images/estrella1.png" alt="Zona Estrella" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal" data-full="images/servicios1.png" data-caption="Servicios y equipamiento">
+            <img src="images/servicios1.png" alt="Servicios y equipamiento" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal tall" data-full="images/visitar2.png" data-caption="Entorno y puntos de visita">
+            <img src="images/visitar2.png" alt="Entorno y puntos de visita" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal" data-full="images/apartamentos1.png" data-caption="Estancias de la casa">
+            <img src="images/apartamentos1.png" alt="Estancias de la casa" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal wide" data-full="images/sol5.png" data-caption="Gran vista exterior">
+            <img src="images/sol5.png" alt="Gran vista exterior" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal" data-full="images/exterior4.png" data-caption="Exterior de la vivienda">
+            <img src="images/exterior4.png" alt="Exterior de la vivienda" loading="lazy" />
+          </button>
+          <button class="gallery-item reveal" data-full="images/luna5.png" data-caption="Espacio vertical de habitación">
+            <img src="images/luna5.png" alt="Espacio vertical de habitación" loading="lazy" />
+          </button>
+        </div>
+      </section>
+
+      <section class="section section-soft" id="entorno">
+        <div class="shell reveal">
+          <p class="eyebrow">Entorno</p>
+          <h2>Naturaleza, rutas y escapadas cerca</h2>
+        </div>
+
+        <div class="shell places-grid">
+          <article class="place-card reveal">
+            <img src="images/aciveiro.png" alt="Paisaje de sendero natural" loading="lazy" />
+            <div>
+              <h3>Senderos y montaña</h3>
+              <p>Acceso rápido a rutas entre bosques, cascadas y vistas abiertas.</p>
+            </div>
+          </article>
+          <article class="place-card reveal">
+            <img src="images/catarata.png" alt="Cascada en entorno natural" loading="lazy" />
+            <div>
+              <h3>Escapadas de día</h3>
+              <p>Opciones perfectas para excursiones cortas en cualquier estación.</p>
+            </div>
+          </article>
+          <article class="place-card reveal">
+            <img src="images/barcia.png" alt="Río y paisaje rural" loading="lazy" />
+            <div>
+              <h3>Rincones con agua</h3>
+              <p>Zonas de río y parajes ideales para desconectar sin prisas.</p>
+            </div>
+          </article>
+          <article class="place-card reveal">
+            <img src="images/ponte.png" alt="Puente histórico" loading="lazy" />
+            <div>
+              <h3>Pueblos con historia</h3>
+              <p>Arquitectura local, gastronomía y vida tranquila a pocos kilómetros.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="servicios">
+        <div class="shell reveal">
+          <p class="eyebrow">Servicios</p>
+          <h2>Todo lo importante, sin complicaciones</h2>
+        </div>
+
+        <div class="shell perks-grid">
+          <article class="perk reveal"><strong>Wi-Fi</strong><span>Conexión estable para ocio o trabajo</span></article>
+          <article class="perk reveal"><strong>Cocina equipada</strong><span>Lista para uso diario</span></article>
+          <article class="perk reveal"><strong>Climatización</strong><span>Confort en verano e invierno</span></article>
+          <article class="perk reveal"><strong>Zona exterior</strong><span>Espacio abierto para descansar</span></article>
+          <article class="perk reveal"><strong>Check-in guiado</strong><span>Atención directa y cercana</span></article>
+          <article class="perk reveal"><strong>Parking</strong><span>Acceso cómodo en la finca</span></article>
+        </div>
+      </section>
+
+      <section class="section section-cta" id="contacto">
+        <div class="shell cta-wrap reveal">
+          <p class="eyebrow">Contacto</p>
+          <h2>¿Te interesa la casa?</h2>
+          <p>
+            Esta web es informativa. Para precios y disponibilidad, contacta por llamada, email o WhatsApp.
+          </p>
+          <div class="cta-actions">
+            <a href="tel:+34612345678" class="btn btn-primary">Llamar ahora</a>
+            <a href="mailto:info@lostresoles.com" class="btn btn-ghost">Enviar email</a>
+            <a
+              href="https://wa.me/34612345678"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-ghost"
+            >
+              WhatsApp
+            </a>
+          </div>
+          <p class="cta-address">Camino Rural, 47 · 29100 Coín, Málaga</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-wrap">
+        <p>© <span id="year"></span> Los Tresoles. Todos los derechos reservados.</p>
+        <a
+          href="https://www.openstreetmap.org/search?query=Coin%2C%20Malaga%2C%20Spain"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver ubicación
+        </a>
+      </div>
+    </footer>
+
+    <dialog class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar imagen">×</button>
+      <img id="lightbox-image" src="" alt="" />
+      <p id="lightbox-caption"></p>
+    </dialog>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
