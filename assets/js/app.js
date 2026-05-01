@@ -71,19 +71,19 @@
     const items = [
       {
         url: "/images-web/inicio1.jpg",
-        alt: "Vista exterior de Los Tresoles casa rural con jardín y montañas"
+        alt: "Vista de Los Tres Soles en su entorno rural de Silleda"
       },
       {
         url: "/images-web/lostressoles.jpg",
-        alt: "Interior acogedor de Los Tresoles con chimenea y decoración rústica"
+        alt: "Fachada y espacios exteriores de Los Tres Soles"
       },
       {
         url: "/images-web/exterior1.jpg",
-        alt: "Dormitorio principal con vistas panorámicas a la sierra"
+        alt: "Zona ajardinada de la finca Los Tres Soles"
       },
       {
         url: "/images-web/tressoles1.jpg",
-        alt: "Terraza exterior con zona de comedor y vistas al valle"
+        alt: "Detalles del entorno natural y áreas de descanso"
       }
     ];
 
@@ -268,7 +268,7 @@
         existing.push(payload);
         localStorage.setItem("contactSubmissions", JSON.stringify(existing));
         form.reset();
-        showToast("Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.", "success");
+        showToast("Consulta guardada correctamente. Contactaremos contigo por los canales indicados.", "success");
       } catch (_err) {
         showToast("Error al enviar el mensaje. Por favor, inténtalo de nuevo.", "error");
       }

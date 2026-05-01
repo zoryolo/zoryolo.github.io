@@ -1,44 +1,41 @@
-# Los Tresoles · Réplica estática de `docs`
+# Los Tres Soles · Web estática (HTML/CSS/JS)
 
-Este proyecto contiene una **réplica en HTML/CSS/JS puro** de la web de `docs/` (antes hecha con React/Vite).
+Proyecto estático listo para publicar en hosting sin build (GitHub Pages, Netlify estático, servidor simple).
 
-## Objetivo
+## Qué incluye
 
-- Mantener el mismo enfoque visual y de contenido de `docs`.
-- Eliminar dependencias de build para poder desplegar como sitio estático.
-- Conservar navegación multipágina y comportamiento interactivo.
+- Sitio multipágina en HTML puro:
+  - `index.html`
+  - `sobre-la-casa/index.html`
+  - `galeria/index.html`
+  - `ubicacion/index.html`
+  - `contacto/index.html`
+  - `privacidad/index.html`
+  - `terminos/index.html`
+  - `404.html`
+- Estilos globales: `assets/css/styles.css`
+- Interacción ligera: `assets/js/app.js`
+  - menú móvil
+  - animaciones de entrada
+  - carrusel en inicio
+  - lightbox en galería
+  - formulario de contacto (guardado local en `localStorage`)
+- Imágenes optimizadas en `images-web/`.
 
-## Estructura principal
+## Fuentes de contenido
 
-- `index.html`: página Inicio.
-- `sobre-la-casa/index.html`
-- `galeria/index.html`
-- `ubicacion/index.html`
-- `contacto/index.html`
-- `privacidad/index.html` y `terminos/index.html` (placeholders legales)
-- `404.html`
-- `assets/css/styles.css`: estilos globales.
-- `assets/js/app.js`: interacción global (menú móvil, animaciones, carrusel, lightbox, formulario).
-- `images/`: librería de imágenes reales disponible en proyecto.
-- `docs/`: implementación original en React (se mantiene como referencia).
-
-## Funcionalidad implementada
-
-- Header sticky con estado activo por página.
-- Menú móvil lateral.
-- Secciones equivalentes a `docs` por página.
-- Carrusel destacado en Inicio.
-- Galería con lightbox en `galeria`.
-- Formulario de contacto con validación y persistencia en `localStorage`.
-- Footer unificado con enlaces rápidos, contacto y legales.
+- Textos base reales: `content/lostressoles_texto/`
+- Se han integrado y adaptado para copy web actual:
+  - ubicación real en Silleda (Pontevedra)
+  - apartamentos Sol, Luna y Estrella
+  - servicios, contacto, GPS y legales
 
 ## Ejecución local
 
-No requiere instalación. Abre `index.html` con un servidor estático local para probar rutas limpias.
-
-Ejemplo:
+No requiere instalación. Sirve la carpeta como estática:
 
 ```bash
-npx serve .
+npx serve static-replica
 ```
 
+Después abre la URL local que te muestre `serve`.
