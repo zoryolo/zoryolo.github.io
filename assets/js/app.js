@@ -70,19 +70,19 @@
 
     const items = [
       {
-        url: "/images/inicio1.png",
+        url: "/images-web/inicio1.jpg",
         alt: "Vista exterior de Los Tresoles casa rural con jardín y montañas"
       },
       {
-        url: "/images/lostressoles.png",
+        url: "/images-web/lostressoles.jpg",
         alt: "Interior acogedor de Los Tresoles con chimenea y decoración rústica"
       },
       {
-        url: "/images/exterior1.png",
+        url: "/images-web/exterior1.jpg",
         alt: "Dormitorio principal con vistas panorámicas a la sierra"
       },
       {
-        url: "/images/tressoles1.png",
+        url: "/images-web/tressoles1.jpg",
         alt: "Terraza exterior con zona de comedor y vistas al valle"
       }
     ];
