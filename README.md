@@ -1,56 +1,44 @@
 # Los Tresoles · Web estática
 
-Sitio promocional **100% estático** para la casa rural Los Tresoles, preparado para despliegue en GitHub Pages sin build, sin framework y sin dependencias de runtime.
+Sitio promocional **100% estático** para la casa rural Los Tresoles, preparado para despliegue sin build (ideal para GitHub Pages o cualquier hosting estático).
 
 ## Objetivo del proyecto
 
-- Mostrar la casa, su galería real y su entorno.
-- Priorizar experiencia móvil y carga rápida.
-- Mantener contacto directo (teléfono/email/WhatsApp), sin motor de reservas.
+- Mantener una experiencia visual de alto nivel inspirada en el proyecto previo `docs/`.
+- Tener una web totalmente funcional con solo `HTML + CSS + JS`.
+- Priorizar móvil, rendimiento y mantenimiento simple.
 
-## Inspección realizada del proyecto existente
+## Qué se encontró al inspeccionar la carpeta
 
-Al revisar esta carpeta se encontró:
+- `docs/`: versión anterior en React/Vite/Tailwind con muy buena base visual.
+- `images/`: imágenes reales de la casa y del entorno.
+- `package.json` y `package-lock.json`: restos del flujo con Node.
 
-- `images/`: biblioteca de imágenes reales de la casa y entorno (fuente principal del nuevo sitio).
-- `docs/`: proyecto anterior con Vite/React/Tailwind y varias páginas.
-- `package.json` y `package-lock.json` en raíz: restos del flujo anterior basado en Node.
+## Estructura activa actual
 
-La nueva entrega publicada para cliente está en **archivos estáticos en raíz** y no requiere instalación de nada.
+- `index.html`: landing principal y secciones de contenido.
+- `styles.css`: sistema visual (tipografías, paleta, layout responsive y componentes).
+- `script.js`: interacciones en JS vanilla (menú móvil, carrusel, reveals y lightbox).
+- `images/`: imágenes reales utilizadas en la web.
 
-## Estructura activa (sitio estático)
+## Diseño implementado
 
-- `index.html`: contenido completo de la landing (secciones, navegación, SEO base).
-- `styles.css`: diseño visual hipermoderno, mobile-first y responsive.
-- `script.js`: interacción en vanilla JS (menú móvil, hero rotativo, reveal on scroll, lightbox de galería).
-- `images/`: imágenes reales usadas por el sitio.
+La versión estática actual replica el enfoque de `docs/` en:
 
-## Características implementadas
-
-- Diseño mobile-first con navegación sticky y menú móvil accesible.
-- Hero inmersivo con rotación automática de imágenes.
-- Secciones informativas: casa, galería, entorno, servicios y contacto.
-- Galería con lightbox nativo (`<dialog>`).
-- Animaciones suaves de entrada con `IntersectionObserver`.
-- CTA directas a teléfono, email y WhatsApp.
-
-## Publicación en GitHub Pages
-
-### Opción recomendada
-
-1. Subir este repositorio a GitHub.
-2. En GitHub: `Settings` → `Pages`.
-3. En `Build and deployment`, elegir `Deploy from a branch`.
-4. Seleccionar rama `main` y carpeta `/ (root)`.
-5. Guardar y esperar la URL pública.
+- Tipografía (`Playfair Display` + `DM Sans`).
+- Paleta cálida y natural.
+- Secciones por bloques con cards, hero inmersivo y CTA.
+- Carrusel destacado con controles e indicadores.
+- Galería con lightbox y composición responsive.
+- Navegación sticky con menú móvil accesible.
 
 ## Mantenimiento rápido
 
-- Cambiar textos: editar directamente en `index.html`.
-- Ajustar colores/estilo: editar variables en `:root` dentro de `styles.css`.
-- Cambiar imágenes: sustituir archivos en `images/` manteniendo nombre, o actualizar rutas en `index.html`.
-- Actualizar contacto: modificar enlaces `tel:`, `mailto:` y `wa.me` en `index.html`.
+- Textos y secciones: editar `index.html`.
+- Colores, espaciado y estilos: editar `styles.css`.
+- Interacciones: editar `script.js`.
+- Imágenes: cambiar en `images/` y actualizar rutas en `index.html` si cambia el nombre.
 
 ## Nota
 
-La web actual está pensada como presentación comercial inicial. Se puede escalar después a multidioma, calendario externo o integración de reservas si el cliente lo solicita.
+No hay reservas online integradas: es una web de presentación y captación de contacto directo (teléfono, email y WhatsApp).
