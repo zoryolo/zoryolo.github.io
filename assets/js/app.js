@@ -70,24 +70,48 @@
 
     const items = [
       {
-        url: "/images-web/inicio1.jpg",
-        alt: "Vista de Los Tres Soles en su entorno rural de Silleda"
+        url: "/images-web/apartamentos2.jpg",
+        alt: "Apartamentos de Los Tres Soles"
+      },
+      {
+        url: "/images-web/exterior1.jpg",
+        alt: "Exterior de Los Tres Soles"
+      },
+      {
+        url: "/images-web/exterior2.jpg",
+        alt: "Exterior de la finca"
       },
       {
         url: "/images-web/exterior3.jpg",
-        alt: "Exteriores de la finca Los Tres Soles"
-      },
-      {
-        url: "/images-web/apartamentos1.jpg",
-        alt: "Zona de apartamentos en Los Tres Soles"
-      },
-      {
-        url: "/images-web/apartamentos3.jpg",
-        alt: "Detalle exterior de apartamentos y entorno"
+        alt: "Zona exterior de Los Tres Soles"
       },
       {
         url: "/images-web/exterior4.jpg",
-        alt: "Rincones exteriores de la casa rural"
+        alt: "Entorno exterior de la casa rural"
+      },
+      {
+        url: "/images-web/tressoles1.jpg",
+        alt: "Detalle de Los Tres Soles"
+      },
+      {
+        url: "/images-web/tressoles2.jpg",
+        alt: "Vista de la propiedad"
+      },
+      {
+        url: "/images-web/tressoles4.jpg",
+        alt: "Rincón de Los Tres Soles"
+      },
+      {
+        url: "/images-web/apartamentos4.jpg",
+        alt: "Apartamentos en la finca"
+      },
+      {
+        url: "/images-web/apartamentos1.jpg",
+        alt: "Zona ajardinada de apartamentos"
+      },
+      {
+        url: "/images-web/lostressoles.jpg",
+        alt: "Los Tres Soles"
       }
     ];
 
