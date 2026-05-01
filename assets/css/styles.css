@@ -472,28 +472,13 @@ main {
   background: #ddd;
 }
 
-.carousel-track {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
+.carousel > img {
   width: 100%;
   height: min(66vw, 600px);
   min-height: 380px;
-}
-
-.carousel-slide {
-  flex: 0 0 100%;
-  scroll-snap-align: center;
-  height: 100%;
-}
-
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .carousel-overlay {
@@ -682,12 +667,21 @@ main {
 
 .lightbox-body {
   position: relative;
+  display: grid;
+  place-items: center;
 }
 
 .lightbox img {
   width: 100%;
   max-height: 90vh;
   object-fit: contain;
+  transition: transform 220ms ease;
+  transform-origin: center center;
+  cursor: zoom-in;
+}
+
+.lightbox img.zoomed {
+  cursor: zoom-out;
 }
 
 .lightbox-close {

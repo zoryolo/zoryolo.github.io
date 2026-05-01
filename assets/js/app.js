@@ -60,13 +60,14 @@
   reveals.forEach((el) => revealObserver.observe(el));
 
   function initHomeCarousel() {
-    const track = document.getElementById("featured-track");
+    const image = document.getElementById("featured-image");
     const prev = document.getElementById("featured-prev");
     const next = document.getElementById("featured-next");
     const indicators = document.getElementById("featured-indicators");
     const counter = document.getElementById("featured-counter");
+    const carousel = document.getElementById("featured-carousel");
 
-    if (!track || !prev || !next || !indicators || !counter) return;
+    if (!image || !prev || !next || !indicators || !counter || !carousel) return;
 
     const items = [
       {
@@ -117,25 +118,12 @@
 
     let index = 0;
     let timer = null;
-    let scrollTicking = false;
-
-    function buildSlides() {
-      track.innerHTML = "";
-      items.forEach((item) => {
-        const slide = document.createElement("figure");
-        slide.className = "carousel-slide";
-
-        const img = document.createElement("img");
-        img.src = item.url;
-        img.alt = item.alt;
-        img.loading = "lazy";
-        img.decoding = "async";
-        slide.appendChild(img);
-        track.appendChild(slide);
-      });
-    }
+    let pauseTimeout = null;
+    const pauseMs = 8000;
 
     function render() {
+      image.src = items[index].url;
+      image.alt = items[index].alt;
       counter.textContent = `${index + 1} / ${items.length}`;
 
       indicators.querySelectorAll("button").forEach((dot, idx) => {
@@ -143,18 +131,9 @@
       });
     }
 
-    function scrollToIndex(targetIndex, behavior = "smooth") {
-      index = targetIndex;
-      const left = targetIndex * track.clientWidth;
-      track.scrollTo({ left, behavior });
+    function goTo(targetIndex) {
+      index = (targetIndex + items.length) % items.length;
       render();
-    }
-
-    function getNearestIndex() {
-      if (!track.clientWidth) return index;
-      const raw = track.scrollLeft / track.clientWidth;
-      const nearest = Math.round(raw);
-      return Math.max(0, Math.min(items.length - 1, nearest));
     }
 
     function buildIndicators() {
@@ -164,56 +143,142 @@
         dot.type = "button";
         dot.setAttribute("aria-label", `Ir a imagen ${idx + 1}`);
         dot.addEventListener("click", () => {
-          scrollToIndex(idx);
-          restart();
+          goTo(idx);
+          pauseAutoplay();
         });
         indicators.appendChild(dot);
       });
     }
 
     function nextSlide() {
-      const target = (index + 1) % items.length;
-      scrollToIndex(target);
+      goTo(index + 1);
     }
 
     function prevSlide() {
-      const target = (index - 1 + items.length) % items.length;
-      scrollToIndex(target);
+      goTo(index - 1);
     }
 
-    function restart() {
+    function startAutoplay() {
       if (timer) clearInterval(timer);
       timer = setInterval(nextSlide, 5200);
     }
 
+    function pauseAutoplay() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+      if (pauseTimeout) clearTimeout(pauseTimeout);
+      pauseTimeout = setTimeout(() => {
+        startAutoplay();
+      }, pauseMs);
+    }
+
     prev.addEventListener("click", () => {
       prevSlide();
-      restart();
+      pauseAutoplay();
     });
 
     next.addEventListener("click", () => {
       nextSlide();
-      restart();
+      pauseAutoplay();
     });
 
-    track.addEventListener("scroll", () => {
-      if (scrollTicking) return;
-      scrollTicking = true;
-      window.requestAnimationFrame(() => {
-        index = getNearestIndex();
-        render();
-        scrollTicking = false;
-      });
+    let touchStartX = 0;
+    let touchStartY = 0;
+    carousel.addEventListener("touchstart", (event) => {
+      const firstTouch = event.changedTouches[0];
+      touchStartX = firstTouch.clientX;
+      touchStartY = firstTouch.clientY;
+    }, { passive: true });
+
+    carousel.addEventListener("touchend", (event) => {
+      const lastTouch = event.changedTouches[0];
+      const deltaX = lastTouch.clientX - touchStartX;
+      const deltaY = lastTouch.clientY - touchStartY;
+      const minSwipe = 45;
+
+      if (Math.abs(deltaX) < minSwipe || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+      if (deltaX < 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+      pauseAutoplay();
     });
 
-    window.addEventListener("resize", () => {
-      scrollToIndex(index, "auto");
-    });
+    let wheelLocked = false;
+    carousel.addEventListener("wheel", (event) => {
+      const dominantHorizontal =
+        Math.abs(event.deltaX) > Math.abs(event.deltaY) || (event.shiftKey && Math.abs(event.deltaY) > 0);
+      if (!dominantHorizontal || wheelLocked) return;
 
-    buildSlides();
+      event.preventDefault();
+      wheelLocked = true;
+      setTimeout(() => {
+        wheelLocked = false;
+      }, 280);
+
+      const movement = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      if (movement > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+      pauseAutoplay();
+    }, { passive: false });
+
     buildIndicators();
-    scrollToIndex(0, "auto");
-    restart();
+    goTo(0);
+    startAutoplay();
+  }
+
+  function initDialogImageZoom(dialog, imageElement) {
+    if (!dialog || !imageElement || imageElement.dataset.zoomReady === "1") return;
+
+    let scale = 1;
+    const minScale = 1;
+    const maxScale = 3;
+    const step = 0.2;
+
+    function applyScale() {
+      imageElement.style.transform = `scale(${scale})`;
+      imageElement.classList.toggle("zoomed", scale > 1.01);
+    }
+
+    function resetZoom() {
+      scale = 1;
+      imageElement.style.transformOrigin = "center center";
+      applyScale();
+    }
+
+    function setOriginFromPointer(event) {
+      const rect = imageElement.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      imageElement.style.transformOrigin = `${Math.min(Math.max(x, 0), 100)}% ${Math.min(Math.max(y, 0), 100)}%`;
+    }
+
+    imageElement.addEventListener("click", (event) => {
+      setOriginFromPointer(event);
+      scale = scale > 1.01 ? 1 : 2;
+      applyScale();
+    });
+
+    imageElement.addEventListener("wheel", (event) => {
+      event.preventDefault();
+      setOriginFromPointer(event);
+      const direction = event.deltaY < 0 ? 1 : -1;
+      scale = Math.min(maxScale, Math.max(minScale, scale + direction * step));
+      applyScale();
+    }, { passive: false });
+
+    dialog.addEventListener("close", resetZoom);
+    imageElement.dataset.zoomReady = "1";
+    resetZoom();
   }
 
   function initGlobalImageLightbox() {
@@ -234,6 +299,7 @@
     const imgEl = dialog.querySelector("img");
     const closeBtn = dialog.querySelector(".lightbox-close");
     if (!imgEl || !closeBtn) return;
+    initDialogImageZoom(dialog, imgEl);
 
     function closeDialog() {
       if (dialog.open) dialog.close();
@@ -278,6 +344,7 @@
     const items = document.querySelectorAll(".gallery-item");
 
     if (!dialog || !img || !tag || !text || !close || items.length === 0) return;
+    initDialogImageZoom(dialog, img);
 
     function closeDialog() {
       if (dialog.open) dialog.close();
