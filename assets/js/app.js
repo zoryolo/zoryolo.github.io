@@ -60,13 +60,13 @@
   reveals.forEach((el) => revealObserver.observe(el));
 
   function initHomeCarousel() {
-    const imageEl = document.getElementById("featured-image");
+    const track = document.getElementById("featured-track");
     const prev = document.getElementById("featured-prev");
     const next = document.getElementById("featured-next");
     const indicators = document.getElementById("featured-indicators");
     const counter = document.getElementById("featured-counter");
 
-    if (!imageEl || !prev || !next || !indicators || !counter) return;
+    if (!track || !prev || !next || !indicators || !counter) return;
 
     const items = [
       {
@@ -117,22 +117,54 @@
 
     let index = 0;
     let timer = null;
+    let scrollTicking = false;
+
+    function buildSlides() {
+      track.innerHTML = "";
+      items.forEach((item) => {
+        const slide = document.createElement("figure");
+        slide.className = "carousel-slide";
+
+        const img = document.createElement("img");
+        img.src = item.url;
+        img.alt = item.alt;
+        img.loading = "lazy";
+        img.decoding = "async";
+        slide.appendChild(img);
+        track.appendChild(slide);
+      });
+    }
 
     function render() {
-      const item = items[index];
-      imageEl.src = item.url;
-      imageEl.alt = item.alt;
       counter.textContent = `${index + 1} / ${items.length}`;
 
+      indicators.querySelectorAll("button").forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === index);
+      });
+    }
+
+    function scrollToIndex(targetIndex, behavior = "smooth") {
+      index = targetIndex;
+      const left = targetIndex * track.clientWidth;
+      track.scrollTo({ left, behavior });
+      render();
+    }
+
+    function getNearestIndex() {
+      if (!track.clientWidth) return index;
+      const raw = track.scrollLeft / track.clientWidth;
+      const nearest = Math.round(raw);
+      return Math.max(0, Math.min(items.length - 1, nearest));
+    }
+
+    function buildIndicators() {
       indicators.innerHTML = "";
       items.forEach((_, idx) => {
         const dot = document.createElement("button");
         dot.type = "button";
         dot.setAttribute("aria-label", `Ir a imagen ${idx + 1}`);
-        if (idx === index) dot.classList.add("active");
         dot.addEventListener("click", () => {
-          index = idx;
-          render();
+          scrollToIndex(idx);
           restart();
         });
         indicators.appendChild(dot);
@@ -140,13 +172,13 @@
     }
 
     function nextSlide() {
-      index = (index + 1) % items.length;
-      render();
+      const target = (index + 1) % items.length;
+      scrollToIndex(target);
     }
 
     function prevSlide() {
-      index = (index - 1 + items.length) % items.length;
-      render();
+      const target = (index - 1 + items.length) % items.length;
+      scrollToIndex(target);
     }
 
     function restart() {
@@ -164,8 +196,77 @@
       restart();
     });
 
-    render();
+    track.addEventListener("scroll", () => {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      window.requestAnimationFrame(() => {
+        index = getNearestIndex();
+        render();
+        scrollTicking = false;
+      });
+    });
+
+    window.addEventListener("resize", () => {
+      scrollToIndex(index, "auto");
+    });
+
+    buildSlides();
+    buildIndicators();
+    scrollToIndex(0, "auto");
     restart();
+  }
+
+  function initGlobalImageLightbox() {
+    const existing = document.getElementById("image-zoom");
+    const dialog = existing || document.createElement("dialog");
+
+    if (!existing) {
+      dialog.id = "image-zoom";
+      dialog.className = "lightbox";
+      dialog.innerHTML =
+        '<div class="lightbox-body">' +
+        '<button class="lightbox-close" aria-label="Cerrar">✕</button>' +
+        '<img src="" alt="" />' +
+        "</div>";
+      document.body.appendChild(dialog);
+    }
+
+    const imgEl = dialog.querySelector("img");
+    const closeBtn = dialog.querySelector(".lightbox-close");
+    if (!imgEl || !closeBtn) return;
+
+    function closeDialog() {
+      if (dialog.open) dialog.close();
+    }
+
+    closeBtn.addEventListener("click", closeDialog);
+    dialog.addEventListener("click", (event) => {
+      const rect = dialog.getBoundingClientRect();
+      const outside =
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom;
+      if (outside) closeDialog();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeDialog();
+    });
+
+    const candidates = document.querySelectorAll("main img");
+    candidates.forEach((img) => {
+      if (img.closest(".gallery-item")) return;
+      if (img.closest("#lightbox")) return;
+      if (img.closest("#image-zoom")) return;
+
+      img.classList.add("zoomable-image");
+      img.addEventListener("click", () => {
+        imgEl.src = img.currentSrc || img.src;
+        imgEl.alt = img.alt || "Imagen ampliada";
+        dialog.showModal();
+      });
+    });
   }
 
   function initGalleryLightbox() {
@@ -217,4 +318,5 @@
 
   initHomeCarousel();
   initGalleryLightbox();
+  initGlobalImageLightbox();
 })();
