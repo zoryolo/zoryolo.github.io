@@ -1,0 +1,110 @@
+.site-loader {
+  --loader-bg-a: #f8f2e8;
+  --loader-bg-b: #fffaf3;
+  --loader-text: #5a4a3f;
+  --loader-track: rgba(139, 106, 77, 0.18);
+  --loader-bar-a: #8b6a4d;
+  --loader-bar-b: #d4b08b;
+
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background:
+    radial-gradient(120% 100% at 50% 35%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.76) 42%, rgba(248, 242, 232, 0.96) 100%),
+    linear-gradient(165deg, var(--loader-bg-b) 0%, var(--loader-bg-a) 100%);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 420ms ease, visibility 420ms ease;
+}
+
+.site-loader--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.site-loader__card {
+  width: min(360px, 88vw);
+  display: grid;
+  justify-items: center;
+  gap: 0.85rem;
+  text-align: center;
+}
+
+.site-loader__picture {
+  display: block;
+}
+
+.site-loader__logo {
+  display: block;
+  width: min(240px, 62vw);
+  height: auto;
+  animation: siteLoaderFloat 2.4s ease-in-out infinite, siteLoaderGlow 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 14px 22px rgba(66, 52, 41, 0.22));
+}
+
+.site-loader__text {
+  margin: 0;
+  color: var(--loader-text);
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(0.95rem, 2.5vw, 1.04rem);
+  letter-spacing: 0.02em;
+}
+
+.site-loader__bar {
+  width: min(240px, 70vw);
+  height: 6px;
+  border-radius: 999px;
+  background: var(--loader-track);
+  overflow: hidden;
+}
+
+.site-loader__bar > span {
+  display: block;
+  width: 44%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--loader-bar-a), var(--loader-bar-b), var(--loader-bar-a));
+  animation: siteLoaderBar 1.15s ease-in-out infinite;
+}
+
+@keyframes siteLoaderFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+@keyframes siteLoaderGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 14px 22px rgba(66, 52, 41, 0.22));
+  }
+  50% {
+    filter: drop-shadow(0 20px 30px rgba(139, 106, 77, 0.32));
+  }
+}
+
+@keyframes siteLoaderBar {
+  0% {
+    transform: translateX(-115%);
+  }
+  100% {
+    transform: translateX(240%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-loader,
+  .site-loader__logo,
+  .site-loader__bar > span {
+    animation: none !important;
+    transition: none !important;
+  }
+}
