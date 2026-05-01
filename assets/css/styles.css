@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #3a322d;
-  --primary: #8b6a4d;
-  --primary-foreground: #ffffff;
-  --secondary: #6d8e76;
-  --secondary-foreground: #ffffff;
-  --muted: #f5f1eb;
-  --muted-foreground: #6a625b;
-  --accent: #f3e6d4;
-  --accent-foreground: #4a3828;
-  --border: #e6ddd2;
+  --background: #f8f6ef;
+  --foreground: #051a6b;
+  --primary: #051a6b;
+  --primary-foreground: #f8f6ef;
+  --secondary: #2f5a20;
+  --secondary-foreground: #f8f6ef;
+  --muted: #f2ecdf;
+  --muted-foreground: #8a6648;
+  --accent: #e8ddc8;
+  --accent-foreground: #8a6648;
+  --border: #d8c8ad;
+  --accent-yellow: #f5c12c;
+  --accent-red: #ac1208;
   --radius: 12px;
 }
 
@@ -82,7 +84,7 @@ h4 {
 
 .skip-link:focus {
   left: 12px;
-  background: #fff;
+  background: var(--background);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 10px;
@@ -128,7 +130,7 @@ main {
   z-index: 50;
   width: 100%;
   border-bottom: 1px solid var(--border);
-  background: rgb(255 255 255 / 94%);
+  background: rgb(248 246 239 / 96%);
   backdrop-filter: blur(10px);
 }
 
@@ -141,7 +143,15 @@ main {
 
 .brand {
   display: inline-flex;
-  flex-direction: column;
+  align-items: center;
+  line-height: 0;
+}
+
+.brand-logo {
+  width: auto;
+  height: clamp(40px, 5vw, 52px);
+  max-width: min(56vw, 220px);
+  object-fit: contain;
 }
 
 .brand-title {
@@ -172,7 +182,7 @@ main {
   border-radius: 8px;
   font-size: 0.93rem;
   font-weight: 500;
-  color: rgb(56 45 36 / 78%);
+  color: color-mix(in srgb, var(--muted-foreground) 78%, var(--foreground) 22%);
   transition: color 150ms ease;
 }
 
@@ -204,7 +214,7 @@ main {
   height: 40px;
   border: 1px solid var(--border);
   border-radius: 10px;
-  background: #fff;
+  background: var(--background);
   display: grid;
   place-content: center;
   gap: 4px;
@@ -223,7 +233,7 @@ main {
   right: -340px;
   width: min(85vw, 320px);
   height: 100dvh;
-  background: #fff;
+  background: var(--background);
   border-left: 1px solid var(--border);
   z-index: 100;
   padding: 1.2rem;
@@ -248,7 +258,7 @@ main {
   border-radius: 10px;
   width: 36px;
   height: 36px;
-  background: #fff;
+  background: var(--background);
   font-size: 1.1rem;
 }
 
@@ -310,7 +320,7 @@ main {
 }
 
 .btn-primary:hover {
-  background: #78593e;
+  background: color-mix(in srgb, var(--primary) 88%, #ffffff 12%);
 }
 
 .btn-secondary {
@@ -319,7 +329,7 @@ main {
 }
 
 .btn-secondary:hover {
-  background: #5f7d67;
+  background: color-mix(in srgb, var(--secondary) 88%, #ffffff 12%);
 }
 
 .btn-outline {
@@ -329,7 +339,7 @@ main {
 }
 
 .btn-outline:hover {
-  background: #fff;
+  background: color-mix(in srgb, var(--background) 92%, #ffffff 8%);
 }
 
 .btn-ghost-light {
@@ -425,7 +435,7 @@ main {
 }
 
 .card {
-  background: #fff;
+  background: color-mix(in srgb, var(--background) 90%, #ffffff 10%);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.15rem;
@@ -442,7 +452,7 @@ main {
   border-radius: 10px;
   display: grid;
   place-content: center;
-  background: color-mix(in srgb, var(--primary) 12%, #fff 88%);
+  background: color-mix(in srgb, var(--accent-yellow) 34%, var(--background) 66%);
   color: var(--primary);
   font-size: 1.25rem;
   margin-bottom: 0.75rem;
@@ -469,7 +479,7 @@ main {
   border-radius: 18px;
   overflow: hidden;
   min-height: 380px;
-  background: #ddd;
+  background: color-mix(in srgb, var(--accent) 70%, #ffffff 30%);
 }
 
 .carousel img {
@@ -563,7 +573,7 @@ main {
 }
 
 .amenity-full {
-  background: #fff;
+  background: color-mix(in srgb, var(--background) 90%, #ffffff 10%);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1rem;
@@ -700,8 +710,8 @@ main {
   font-weight: 600;
   border-radius: 999px;
   padding: 0.22rem 0.55rem;
-  background: var(--primary);
-  color: var(--primary-foreground);
+  background: var(--accent-yellow);
+  color: var(--primary);
 }
 
 .faq-list {
@@ -764,11 +774,11 @@ main {
 }
 
 .toast.success {
-  background: #1f7a4f;
+  background: var(--secondary);
 }
 
 .toast.error {
-  background: #a93030;
+  background: var(--accent-red);
 }
 
 .map-placeholder {
@@ -791,8 +801,8 @@ main {
   width: 46px;
   height: 46px;
   border-radius: 10px;
-  background: color-mix(in srgb, var(--primary) 12%, #fff 88%);
-  color: var(--primary);
+  background: color-mix(in srgb, var(--secondary) 22%, var(--background) 78%);
+  color: var(--secondary);
   display: grid;
   place-content: center;
   font-size: 1.1rem;
@@ -808,7 +818,7 @@ main {
   margin-top: 1.5rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: #fff;
+  background: color-mix(in srgb, var(--background) 88%, #ffffff 12%);
   padding: 1rem;
 }
 
@@ -845,6 +855,11 @@ main {
 .site-footer {
   background: var(--muted);
   color: var(--muted-foreground);
+}
+
+.mobile-panel-head .brand-logo {
+  height: 40px;
+  max-width: min(55vw, 190px);
 }
 
 .footer-top {

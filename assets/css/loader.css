@@ -1,10 +1,10 @@
 .site-loader {
-  --loader-bg-a: #f8f2e8;
-  --loader-bg-b: #fffaf3;
-  --loader-text: #5a4a3f;
-  --loader-track: rgba(139, 106, 77, 0.18);
-  --loader-bar-a: #8b6a4d;
-  --loader-bar-b: #d4b08b;
+  --loader-bg-a: #f2ecdf;
+  --loader-bg-b: #f8f6ef;
+  --loader-text: #8a6648;
+  --loader-track: rgba(5, 26, 107, 0.18);
+  --loader-bar-a: #051a6b;
+  --loader-bar-b: #f5c12c;
 
   position: fixed;
   inset: 0;
@@ -13,7 +13,7 @@
   place-items: center;
   padding: 1.25rem;
   background:
-    radial-gradient(120% 100% at 50% 35%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.76) 42%, rgba(248, 242, 232, 0.96) 100%),
+    radial-gradient(120% 100% at 50% 35%, rgba(255, 255, 255, 0.86) 0%, rgba(255, 255, 255, 0.68) 42%, rgba(242, 236, 223, 0.94) 100%),
     linear-gradient(165deg, var(--loader-bg-b) 0%, var(--loader-bg-a) 100%);
   opacity: 1;
   visibility: visible;
@@ -87,7 +87,7 @@
     filter: drop-shadow(0 14px 22px rgba(66, 52, 41, 0.22));
   }
   50% {
-    filter: drop-shadow(0 20px 30px rgba(139, 106, 77, 0.32));
+    filter: drop-shadow(0 20px 30px rgba(5, 26, 107, 0.26));
   }
 }
 

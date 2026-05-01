@@ -19,7 +19,7 @@ Proyecto estático listo para publicar en hosting sin build (GitHub Pages, Netli
   - animaciones de entrada
   - carrusel en inicio
   - lightbox en galería
-  - formulario de contacto (guardado local en `localStorage`)
+  - navegación y acciones CTA directas (WhatsApp/teléfono)
 - Imágenes optimizadas en `images-web/`.
 
 ## Fuentes de contenido

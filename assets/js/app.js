@@ -74,16 +74,20 @@
         alt: "Vista de Los Tres Soles en su entorno rural de Silleda"
       },
       {
-        url: "/images-web/lostressoles.jpg",
-        alt: "Fachada y espacios exteriores de Los Tres Soles"
+        url: "/images-web/exterior3.jpg",
+        alt: "Exteriores de la finca Los Tres Soles"
       },
       {
-        url: "/images-web/exterior1.jpg",
-        alt: "Zona ajardinada de la finca Los Tres Soles"
+        url: "/images-web/apartamentos1.jpg",
+        alt: "Zona de apartamentos en Los Tres Soles"
       },
       {
-        url: "/images-web/tressoles1.jpg",
-        alt: "Detalles del entorno natural y áreas de descanso"
+        url: "/images-web/apartamentos3.jpg",
+        alt: "Detalle exterior de apartamentos y entorno"
+      },
+      {
+        url: "/images-web/exterior4.jpg",
+        alt: "Rincones exteriores de la casa rural"
       }
     ];
 
@@ -187,95 +191,6 @@
     });
   }
 
-  function initContactForm() {
-    const form = document.getElementById("contact-form");
-    const toast = document.getElementById("toast");
-    if (!form) return;
-
-    const fields = {
-      name: form.querySelector("#name"),
-      email: form.querySelector("#email"),
-      message: form.querySelector("#message")
-    };
-
-    function showError(id, msg) {
-      const target = form.querySelector(`[data-error='${id}']`);
-      if (target) target.textContent = msg;
-    }
-
-    function clearErrors() {
-      form.querySelectorAll("[data-error]").forEach((el) => {
-        el.textContent = "";
-      });
-    }
-
-    function showToast(message, type) {
-      if (!toast) return;
-      toast.textContent = message;
-      toast.className = `toast ${type} show`;
-      setTimeout(() => {
-        toast.className = "toast";
-      }, 2800);
-    }
-
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      clearErrors();
-
-      let hasError = false;
-      const name = fields.name ? fields.name.value.trim() : "";
-      const email = fields.email ? fields.email.value.trim() : "";
-      const message = fields.message ? fields.message.value.trim() : "";
-
-      if (!name) {
-        showError("name", "El nombre es obligatorio");
-        hasError = true;
-      }
-
-      if (!email) {
-        showError("email", "El email es obligatorio");
-        hasError = true;
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-        showError("email", "Email inválido");
-        hasError = true;
-      }
-
-      if (!message) {
-        showError("message", "El mensaje es obligatorio");
-        hasError = true;
-      } else if (message.length < 10) {
-        showError("message", "El mensaje debe tener al menos 10 caracteres");
-        hasError = true;
-      }
-
-      if (hasError) {
-        showToast("Revisa los campos marcados.", "error");
-        return;
-      }
-
-      const payload = {
-        id: Date.now(),
-        timestamp: new Date().toISOString(),
-        name,
-        email,
-        phone: form.querySelector("#phone")?.value.trim() || "",
-        dates: form.querySelector("#dates")?.value.trim() || "",
-        message
-      };
-
-      try {
-        const existing = JSON.parse(localStorage.getItem("contactSubmissions") || "[]");
-        existing.push(payload);
-        localStorage.setItem("contactSubmissions", JSON.stringify(existing));
-        form.reset();
-        showToast("Consulta guardada correctamente. Contactaremos contigo por los canales indicados.", "success");
-      } catch (_err) {
-        showToast("Error al enviar el mensaje. Por favor, inténtalo de nuevo.", "error");
-      }
-    });
-  }
-
   initHomeCarousel();
   initGalleryLightbox();
-  initContactForm();
 })();
