@@ -6,8 +6,17 @@
     <title>Los Tres Soles - Casa Rural en Silleda, Galicia</title>
     <meta
       name="description"
-      content="Los Tres Soles, casa rural en Silleda (Pontevedra): apartamentos Sol, Luna y Estrella, 3.000 m² de jardín y contacto directo por WhatsApp y teléfono."
+      content="Los Tres Soles, casa rural en Silleda (Pontevedra): apartamentos Sol, Luna y Estrella, finca de 3.000 m², contacto directo por WhatsApp y teléfono."
     />
+    <meta property="og:title" content="Los Tres Soles - Casa Rural en Silleda, Galicia" />
+    <meta property="og:description" content="Apartamentos Sol, Luna y Estrella con jardín, entorno rural y contacto directo por WhatsApp." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://zoryolo.github.io/" />
+    <meta property="og:image" content="/images-web/lostressoles.jpg" />
+    <link rel="canonical" href="https://zoryolo.github.io/" />
+    <link rel="alternate" hreflang="es" href="https://zoryolo.github.io/" />
+    <link rel="alternate" hreflang="en" href="https://zoryolo.github.io/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://zoryolo.github.io/" />
     <link rel="preload" as="image" href="/assets/brand/logo-las-tres-soles-loader.webp" type="image/webp" />
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png" />
@@ -18,6 +27,43 @@
     <link rel="stylesheet" href="/assets/css/styles.css" />
     <link rel="stylesheet" href="/assets/css/loader.css" />
     <script src="/assets/js/loader.js" defer></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LodgingBusiness",
+        "name": "Los Tres Soles",
+        "description": "Casa rural en Silleda con apartamentos Sol, Luna y Estrella.",
+        "url": "https://zoryolo.github.io/",
+        "image": [
+          "https://zoryolo.github.io/images-web/lostressoles.jpg",
+          "https://zoryolo.github.io/images-web/exterior1.jpg"
+        ],
+        "telephone": ["+34609829072", "+34619820707"],
+        "email": "seomerce@hotmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Maril, 8 - Fiestras",
+          "postalCode": "36548",
+          "addressLocality": "Silleda",
+          "addressRegion": "Pontevedra",
+          "addressCountry": "ES"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 42.687801,
+          "longitude": -8.273509
+        },
+        "checkinTime": "17:00",
+        "checkoutTime": "12:00",
+        "petsAllowed": false,
+        "amenityFeature": [
+          {"@type":"LocationFeatureSpecification","name":"Parking"},
+          {"@type":"LocationFeatureSpecification","name":"Garden"},
+          {"@type":"LocationFeatureSpecification","name":"Heating"}
+        ],
+        "sameAs": ["https://maps.app.goo.gl/cpG7gEozG1e9p87j7"]
+      }
+    </script>
   </head>
   <body data-page="home">
     <div id="site-loader" class="site-loader" aria-label="Cargando contenido" role="status" aria-live="polite">
@@ -46,6 +92,7 @@
             <a class="nav-link" data-route="/galeria/" href="/galeria/">Galería</a>
             <a class="nav-link" data-route="/ubicacion/" href="/ubicacion/">Qué visitar</a>
             <a class="nav-link" data-route="/contacto/" href="/contacto/">Contacto</a>
+            <a class="lang-switch" href="/en/" aria-label="Switch to English">EN</a>
           </div>
 
           <div class="nav-cta">
@@ -72,6 +119,7 @@
           <a class="mobile-link" data-route="/galeria/" href="/galeria/">Galería</a>
           <a class="mobile-link" data-route="/ubicacion/" href="/ubicacion/">Qué visitar</a>
           <a class="mobile-link" data-route="/contacto/" href="/contacto/">Contacto</a>
+          <a class="mobile-link" href="/en/">English</a>
         </nav>
       </aside>
       <div class="mobile-backdrop" id="mobile-backdrop"></div>
@@ -81,7 +129,12 @@
           <div class="hero-bg" style="background-image:url('/images-web/inicio1.jpg')"></div>
           <div class="container-custom hero-content reveal">
             <h1>Los Tres Soles</h1>
-            <p>Arte, cultura y tradición en pleno corazón de Galicia</p>
+            <p>Casa rural en Silleda para desconectar y recorrer Galicia a tu ritmo</p>
+            <div class="value-points">
+              <span class="value-point">3 apartamentos independientes</span>
+              <span class="value-point">3.000 m² de finca</span>
+              <span class="value-point">Ubicación estratégica en Galicia</span>
+            </div>
             <div class="hero-actions">
               <a class="btn btn-primary" href="https://wa.me/34609829072" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
               <a class="btn btn-ghost-light" href="tel:+34609829072">Llamar ahora</a>
@@ -91,9 +144,10 @@
 
         <section class="section-padding">
           <div class="container-custom reveal section-head">
-            <h2>Un espacio para vivir, disfrutar y descansar</h2>
+            <h2>Un espacio rural completo y práctico</h2>
             <p>
-              Tres apartamentos rurales, una finca de 3.000 m² y ubicación estratégica para conocer Galicia sin prisas.
+              Sol, Luna y Estrella: apartamentos equipados dentro de una finca de más de 3.000 m², ideal para parejas,
+              familias y escapadas tranquilas.
             </p>
           </div>
           <div class="container-custom reveal">
@@ -111,50 +165,40 @@
         </section>
 
         <section class="section-padding section-muted">
-          <div class="container-custom grid-2">
-            <div class="reveal">
-              <h2>Una casa rural auténtica y cómoda</h2>
-              <div class="split-list" style="margin-top:1rem;">
-                <p>
-                  Los Tres Soles es un conjunto de tres apartamentos anexos a la casa principal (más de 500 años),
-                  rodeado de naturaleza y paisaje gallego.
-                </p>
-                <p>
-                  Dispones de jardín, prado y huerta, además de acceso cómodo por carretera para visitar Santiago,
-                  Ourense, Pontevedra o Lalín durante la estancia.
-                </p>
-                <p>
-                  Es ideal tanto para escapadas de descanso como para viajes de turismo cultural, gastronómico y de
-                  senderismo.
-                </p>
+          <div class="container-custom trust-grid">
+            <article class="card reveal">
+              <h3>Reseñas reales en Google Maps</h3>
+              <p>Los huéspedes destacan especialmente la limpieza, el trato cercano y la tranquilidad del entorno.</p>
+              <p class="review-quote">Consulta opiniones actualizadas antes de reservar.</p>
+              <div style="margin-top:1rem;">
+                <a class="btn btn-outline" href="https://maps.app.goo.gl/cpG7gEozG1e9p87j7" target="_blank" rel="noopener noreferrer">Ver reseñas en Google Maps</a>
               </div>
-              <div style="margin-top:1.4rem;">
-                <a class="btn btn-outline" href="/sobre-la-casa/">Ver apartamentos y fotos →</a>
+            </article>
+            <article class="card reveal">
+              <h3>Reserva directa, sin intermediarios</h3>
+              <p>Contacto preferido por WhatsApp. También atendemos por teléfono para resolver dudas al momento.</p>
+              <div class="pricing-list">
+                <p>• Respuesta habitual rápida</p>
+                <p>• Confirmación de disponibilidad real</p>
+                <p>• Recomendación del apartamento según tu viaje</p>
               </div>
-            </div>
-            <div class="grid-2 reveal">
-              <div class="image-card" style="height:260px;">
-                <img src="/images-web/apartamentos1.jpg" alt="Zona exterior ajardinada de Los Tres Soles" />
-              </div>
-              <div class="image-card" style="height:260px; margin-top:2rem;">
-                <img src="/images-web/exterior2.jpg" alt="Entorno rural de Los Tres Soles en Silleda" />
-              </div>
-            </div>
+            </article>
           </div>
         </section>
 
         <section class="section-padding">
           <div class="container-custom reveal section-head">
-            <h2>Información clave antes de reservar</h2>
-            <p>Todo lo esencial en un vistazo</p>
+            <h2>Tarifas y condiciones claras</h2>
+            <p>Información orientativa para decidir rápido</p>
           </div>
           <div class="container-custom grid-3">
-            <article class="card reveal"><div class="card-icon">🏠</div><h3>Apartamentos</h3><p>Sol, Luna y Estrella. Cada uno con cocina equipada y espacios independientes.</p></article>
-            <article class="card reveal"><div class="card-icon">⏰</div><h3>Horarios</h3><p>Check-in a las 17:00 h y check-out a las 12:00 h.</p></article>
-            <article class="card reveal"><div class="card-icon">📅</div><h3>Estancia mínima</h3><p>Generalmente 2 noches. Puentes y temporada alta: consultar.</p></article>
-            <article class="card reveal"><div class="card-icon">🐾</div><h3>Mascotas</h3><p>No se admiten animales en los apartamentos.</p></article>
-            <article class="card reveal"><div class="card-icon">💶</div><h3>Tarifas</h3><p>Desde 85 €/noche (Sol y Estrella) y desde 100 €/noche (Luna). Precios finales por consulta.</p></article>
-            <article class="card reveal"><div class="card-icon">📲</div><h3>Reserva directa</h3><p>Confirmación por WhatsApp o teléfono, sin intermediarios.</p></article>
+            <article class="card reveal"><div class="card-icon">☀️</div><h3>Apartamento Sol</h3><p>Desde 85 € / noche</p><p>Habitación doble + habitación matrimonial, cocina equipada y baño completo.</p></article>
+            <article class="card reveal"><div class="card-icon">🌙</div><h3>Apartamento Luna</h3><p>Desde 100 € / noche</p><p>Habitación doble + habitación matrimonial, sala-comedor y cocina completa.</p></article>
+            <article class="card reveal"><div class="card-icon">⭐</div><h3>Apartamento Estrella</h3><p>Desde 85 € / noche</p><p>44 m² en planta baja, cama de 150, salón con sofás-cama y cocina equipada.</p></article>
+          </div>
+          <div class="container-custom grid-2" style="margin-top:1rem;">
+            <article class="card reveal"><h3>Condiciones habituales</h3><div class="pricing-list"><p>• Check-in: 17:00 h</p><p>• Check-out: 12:00 h</p><p>• Estancia mínima habitual: 2 noches</p></div></article>
+            <article class="card reveal"><h3>Reserva y pago</h3><div class="pricing-list"><p>• Precio final según fechas y apartamento</p><p>• Confirmación de reserva por WhatsApp o teléfono</p><p>• Temporada alta y puentes: consultar condiciones</p></div></article>
           </div>
         </section>
 
@@ -176,11 +220,35 @@
           </div>
         </section>
 
+        <section class="section-padding">
+          <div class="container-custom grid-2">
+            <article class="card reveal" style="padding:1.6rem;">
+              <h3>FAQ rápida</h3>
+              <div class="split-list" style="margin-top:0.8rem;">
+                <p>• ¿Mínimo de noches? Habitualmente 2</p>
+                <p>• ¿Mascotas? No se admiten</p>
+                <p>• ¿Cómo reservar? WhatsApp o teléfono</p>
+                <p>• ¿Respuesta? Normalmente muy ágil</p>
+              </div>
+            </article>
+            <article class="card reveal" style="padding:1.6rem;">
+              <h3>Cómo llegar</h3>
+              <div class="split-list" style="margin-top:0.8rem;">
+                <p>Maril, 8 - Fiestras, 36548 Silleda (Pontevedra)</p>
+                <p>Coordenadas: 42.687801, -8.273509</p>
+              </div>
+              <div style="margin-top:1rem;">
+                <a class="btn btn-outline" href="https://maps.google.com/?q=42.687801,-8.273509" target="_blank" rel="noopener noreferrer">Abrir en Google Maps</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
         <section class="section-padding cta-section">
           <div class="container-custom cta-content reveal">
             <h2>¿Quieres disponibilidad para tus fechas?</h2>
             <p>
-              Te respondemos rápido por WhatsApp o teléfono para resolver dudas y confirmar apartamento.
+              Escríbenos por WhatsApp o llámanos. Te diremos qué apartamento encaja mejor según personas, fechas y tipo de estancia.
             </p>
             <div class="cta-buttons">
               <a class="btn btn-secondary" href="https://wa.me/34609829072" target="_blank" rel="noopener noreferrer">WhatsApp</a>

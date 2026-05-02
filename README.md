@@ -10,6 +10,13 @@ Proyecto estático listo para publicar en hosting sin build (GitHub Pages, Netli
   - `galeria/index.html`
   - `ubicacion/index.html`
   - `contacto/index.html`
+  - `en/index.html`
+  - `en/sobre-la-casa/index.html`
+  - `en/galeria/index.html`
+  - `en/ubicacion/index.html`
+  - `en/contacto/index.html`
+  - `en/privacidad/index.html`
+  - `en/terminos/index.html`
   - `privacidad/index.html`
   - `terminos/index.html`
   - `404.html`
@@ -18,9 +25,14 @@ Proyecto estático listo para publicar en hosting sin build (GitHub Pages, Netli
   - menú móvil
   - animaciones de entrada
   - carrusel en inicio
-  - lightbox en galería
+  - lightbox global y zoom en imágenes
+  - barra CTA fija en móvil (WhatsApp / Llamar)
   - navegación y acciones CTA directas (WhatsApp/teléfono)
-- Imágenes optimizadas en `images-web/`.
+- SEO local base:
+  - metadatos OG/canonical en páginas principales
+  - `hreflang` ES/EN en páginas de captación
+  - `schema.org/LodgingBusiness` en portada
+- Imágenes en `images-web/`.
 
 ## Fuentes de contenido
 
@@ -39,3 +51,8 @@ npx serve static-replica
 ```
 
 Después abre la URL local que te muestre `serve`.
+
+## Nota de idioma
+
+- Español: rutas raíz (`/`, `/sobre-la-casa/`, etc.)
+- Inglés: rutas bajo `/en/` (`/en/`, `/en/contacto/`, etc.)
