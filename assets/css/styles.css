@@ -932,6 +932,13 @@ main {
   display: flex;
   gap: 0.55rem;
   z-index: 80;
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.mobile-sticky-cta--hidden {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
 }
 
 .mobile-sticky-cta__btn {

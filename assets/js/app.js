@@ -74,6 +74,28 @@
     document.body.appendChild(bar);
   }
 
+  function initMobileStickyCtaVisibility() {
+    const bar = document.getElementById("mobile-sticky-cta");
+    if (!bar) return;
+
+    const hero = document.querySelector(".hero-banner");
+    if (!hero) {
+      bar.classList.remove("mobile-sticky-cta--hidden");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        const shouldHide = entry.isIntersecting && entry.intersectionRatio > 0.18;
+        bar.classList.toggle("mobile-sticky-cta--hidden", shouldHide);
+      },
+      { threshold: [0, 0.18, 0.35, 0.6, 1] }
+    );
+
+    observer.observe(hero);
+  }
+
   function initHomeCarousel() {
     const image = document.getElementById("featured-image");
     const prev = document.getElementById("featured-prev");
@@ -402,4 +424,5 @@
   initGalleryLightbox();
   initGlobalImageLightbox();
   initMobileStickyCta();
+  initMobileStickyCtaVisibility();
 })();
