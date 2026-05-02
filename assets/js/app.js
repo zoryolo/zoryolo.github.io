@@ -1,23 +1,20 @@
 (function () {
-  const page = document.body.dataset.page || "home";
+  const isEnglish = document.documentElement.lang.toLowerCase().startsWith("en");
   const currentYearEls = document.querySelectorAll("[data-current-year]");
   currentYearEls.forEach((el) => {
     el.textContent = String(new Date().getFullYear());
   });
 
-  const routeByPage = {
-    home: "/",
-    sobre: "/sobre-la-casa/",
-    galeria: "/galeria/",
-    ubicacion: "/ubicacion/",
-    contacto: "/contacto/",
-    privacidad: "/privacidad/",
-    terminos: "/terminos/"
-  };
+  function normalizePath(path) {
+    if (!path) return "/";
+    if (path.length > 1 && path.endsWith("/")) return path.slice(0, -1);
+    return path;
+  }
 
-  const currentRoute = routeByPage[page] || "/";
+  const currentRoute = normalizePath(window.location.pathname);
   document.querySelectorAll("[data-route]").forEach((link) => {
-    if (link.getAttribute("data-route") === currentRoute) {
+    const targetRoute = normalizePath(link.getAttribute("data-route"));
+    if (targetRoute === currentRoute) {
       link.classList.add("active");
     }
   });
@@ -59,6 +56,24 @@
   );
   reveals.forEach((el) => revealObserver.observe(el));
 
+  function initMobileStickyCta() {
+    const existing = document.getElementById("mobile-sticky-cta");
+    if (existing) return;
+
+    const bar = document.createElement("div");
+    bar.id = "mobile-sticky-cta";
+    bar.className = "mobile-sticky-cta";
+    bar.innerHTML = `
+      <a class="mobile-sticky-cta__btn mobile-sticky-cta__btn--wa" href="https://wa.me/34609829072" target="_blank" rel="noopener noreferrer">
+        ${isEnglish ? "WhatsApp" : "WhatsApp"}
+      </a>
+      <a class="mobile-sticky-cta__btn mobile-sticky-cta__btn--tel" href="tel:+34609829072">
+        ${isEnglish ? "Call" : "Llamar"}
+      </a>
+    `;
+    document.body.appendChild(bar);
+  }
+
   function initHomeCarousel() {
     const image = document.getElementById("featured-image");
     const prev = document.getElementById("featured-prev");
@@ -72,43 +87,43 @@
     const items = [
       {
         url: "/images-web/apartamentos2.jpg",
-        alt: "Apartamentos de Los Tres Soles"
+        alt: isEnglish ? "Apartments at Los Tres Soles" : "Apartamentos de Los Tres Soles"
       },
       {
         url: "/images-web/exterior1.jpg",
-        alt: "Exterior de Los Tres Soles"
+        alt: isEnglish ? "Exterior of Los Tres Soles" : "Exterior de Los Tres Soles"
       },
       {
         url: "/images-web/exterior2.jpg",
-        alt: "Exterior de la finca"
+        alt: isEnglish ? "Exterior of the property" : "Exterior de la finca"
       },
       {
         url: "/images-web/exterior3.jpg",
-        alt: "Zona exterior de Los Tres Soles"
+        alt: isEnglish ? "Outdoor area of Los Tres Soles" : "Zona exterior de Los Tres Soles"
       },
       {
         url: "/images-web/exterior4.jpg",
-        alt: "Entorno exterior de la casa rural"
+        alt: isEnglish ? "Rural setting around the house" : "Entorno exterior de la casa rural"
       },
       {
         url: "/images-web/tressoles1.jpg",
-        alt: "Detalle de Los Tres Soles"
+        alt: isEnglish ? "Details of Los Tres Soles" : "Detalle de Los Tres Soles"
       },
       {
         url: "/images-web/tressoles2.jpg",
-        alt: "Vista de la propiedad"
+        alt: isEnglish ? "Property view" : "Vista de la propiedad"
       },
       {
         url: "/images-web/tressoles4.jpg",
-        alt: "Rincón de Los Tres Soles"
+        alt: isEnglish ? "Corner of Los Tres Soles" : "Rincón de Los Tres Soles"
       },
       {
         url: "/images-web/apartamentos4.jpg",
-        alt: "Apartamentos en la finca"
+        alt: isEnglish ? "Apartments inside the estate" : "Apartamentos en la finca"
       },
       {
         url: "/images-web/apartamentos1.jpg",
-        alt: "Zona ajardinada de apartamentos"
+        alt: isEnglish ? "Garden area by the apartments" : "Zona ajardinada de apartamentos"
       },
       {
         url: "/images-web/lostressoles.jpg",
@@ -141,7 +156,7 @@
       items.forEach((_, idx) => {
         const dot = document.createElement("button");
         dot.type = "button";
-        dot.setAttribute("aria-label", `Ir a imagen ${idx + 1}`);
+        dot.setAttribute("aria-label", isEnglish ? `Go to image ${idx + 1}` : `Ir a imagen ${idx + 1}`);
         dot.addEventListener("click", () => {
           goTo(idx);
           pauseAutoplay();
@@ -290,7 +305,7 @@
       dialog.className = "lightbox";
       dialog.innerHTML =
         '<div class="lightbox-body">' +
-        '<button class="lightbox-close" aria-label="Cerrar">✕</button>' +
+        `<button class="lightbox-close" aria-label="${isEnglish ? "Close" : "Cerrar"}">✕</button>` +
         '<img src="" alt="" />' +
         "</div>";
       document.body.appendChild(dialog);
@@ -329,7 +344,7 @@
       img.classList.add("zoomable-image");
       img.addEventListener("click", () => {
         imgEl.src = img.currentSrc || img.src;
-        imgEl.alt = img.alt || "Imagen ampliada";
+        imgEl.alt = img.alt || (isEnglish ? "Enlarged image" : "Imagen ampliada");
         dialog.showModal();
       });
     });
@@ -386,4 +401,5 @@
   initHomeCarousel();
   initGalleryLightbox();
   initGlobalImageLightbox();
+  initMobileStickyCta();
 })();
