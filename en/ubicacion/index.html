@@ -133,14 +133,39 @@
 
         <section class="section-padding">
           <div class="container-custom reveal section-head">
-            <h2>Recommended itineraries</h2>
-            <p>Self-explanatory plans for 1, 2 or 3 days</p>
+            <h2>Choose your plan</h2>
+            <p>Select your trip style and we will show a practical base plan</p>
           </div>
-          <div class="container-custom itinerary-grid">
-            <article class="card reveal"><h3>1 day: area essentials</h3><p>Morning in nature (Toxa), local lunch in Deza and heritage in Carboeiro or Aciveiro in the afternoon.</p></article>
-            <article class="card reveal"><h3>2 days: rural + city</h3><p>Day 1 in Silleda surroundings. Day 2 in Santiago de Compostela and return for dinner in the region.</p></article>
-            <article class="card reveal"><h3>3 days: central Galicia highlights</h3><p>Combine Silleda, Santiago, Ourense or Pontevedra based on your interests: culture, food or hiking.</p></article>
-            <article class="card reveal"><h3>Food route</h3><p>Lacón de Silleda, Empanada de Bandeira and Cocido de Lalín are local classics worth trying.</p></article>
+          <div class="container-custom reveal plan-selector-shell" data-plan-selector>
+            <div class="plan-selector" role="tablist" aria-label="Trip plan types">
+              <button class="plan-option is-active" type="button" data-plan-btn="plan-1day" aria-pressed="true">1 day</button>
+              <button class="plan-option" type="button" data-plan-btn="plan-2days" aria-pressed="false">2 days</button>
+              <button class="plan-option" type="button" data-plan-btn="plan-nature" aria-pressed="false">Nature</button>
+              <button class="plan-option" type="button" data-plan-btn="plan-culture" aria-pressed="false">Culture</button>
+              <button class="plan-option" type="button" data-plan-btn="plan-quiet" aria-pressed="false">Quiet getaway</button>
+            </div>
+            <div class="plan-panels">
+              <article class="card plan-panel" data-plan-panel="plan-1day">
+                <h3>1 day: area essentials</h3>
+                <p>Morning in nature (Toxa), local lunch in Deza and heritage in Carboeiro or Aciveiro in the afternoon.</p>
+              </article>
+              <article class="card plan-panel" data-plan-panel="plan-2days" hidden>
+                <h3>2 days: rural + city</h3>
+                <p>Day 1 in Silleda surroundings. Day 2 in Santiago de Compostela and return for dinner in the region.</p>
+              </article>
+              <article class="card plan-panel" data-plan-panel="plan-nature" hidden>
+                <h3>Nature</h3>
+                <p>Fervenza do Toxa, Ferveda and woodland water trails for an active plan without long transfers.</p>
+              </article>
+              <article class="card plan-panel" data-plan-panel="plan-culture" hidden>
+                <h3>Culture</h3>
+                <p>Medieval bridges, Romanesque churches and monasteries such as Aciveiro or Carboeiro.</p>
+              </article>
+              <article class="card plan-panel" data-plan-panel="plan-quiet" hidden>
+                <h3>Quiet getaway</h3>
+                <p>Mix garden time, rest and gentle walks through villages and viewpoints in rural Galicia.</p>
+              </article>
+            </div>
           </div>
         </section>
 

@@ -133,14 +133,39 @@
 
         <section class="section-padding">
           <div class="container-custom reveal section-head">
-            <h2>Itinerarios recomendados</h2>
-            <p>Planes autoexplicativos para 1, 2 o 3 días</p>
+            <h2>Elige tu plan</h2>
+            <p>Selecciona el tipo de escapada y te mostramos una propuesta base</p>
           </div>
-          <div class="container-custom itinerary-grid">
-            <article class="card reveal"><h3>1 día: esencia de la zona</h3><p>Mañana en naturaleza (Toxa), comida local en Deza y tarde de patrimonio en Carboeiro o Aciveiro.</p></article>
-            <article class="card reveal"><h3>2 días: rural + ciudad</h3><p>Día 1 en entorno natural de Silleda. Día 2 en Santiago de Compostela y regreso para cenar en la comarca.</p></article>
-            <article class="card reveal"><h3>3 días: Galicia central completa</h3><p>Combina Silleda, Santiago, Ourense o Pontevedra según intereses: cultura, gastronomía o senderismo.</p></article>
-            <article class="card reveal"><h3>Ruta gastronómica</h3><p>Lacón de Silleda, Empanada de Bandeira y Cocido de Lalín como parada obligatoria.</p></article>
+          <div class="container-custom reveal plan-selector-shell" data-plan-selector>
+            <div class="plan-selector" role="tablist" aria-label="Tipos de plan">
+              <button class="plan-option is-active" type="button" data-plan-btn="plan-1dia" aria-pressed="true">1 día</button>
+              <button class="plan-option" type="button" data-plan-btn="plan-2dias" aria-pressed="false">2 días</button>
+              <button class="plan-option" type="button" data-plan-btn="plan-naturaleza" aria-pressed="false">Naturaleza</button>
+              <button class="plan-option" type="button" data-plan-btn="plan-cultura" aria-pressed="false">Cultura</button>
+              <button class="plan-option" type="button" data-plan-btn="plan-tranquila" aria-pressed="false">Escapada tranquila</button>
+            </div>
+            <div class="plan-panels">
+              <article class="card plan-panel" data-plan-panel="plan-1dia">
+                <h3>1 día: esencia de la zona</h3>
+                <p>Mañana en naturaleza (Toxa), comida local en Deza y tarde de patrimonio en Carboeiro o Aciveiro.</p>
+              </article>
+              <article class="card plan-panel" data-plan-panel="plan-2dias" hidden>
+                <h3>2 días: rural + ciudad</h3>
+                <p>Día 1 en entorno natural de Silleda. Día 2 en Santiago de Compostela y regreso para cenar en la comarca.</p>
+              </article>
+              <article class="card plan-panel" data-plan-panel="plan-naturaleza" hidden>
+                <h3>Naturaleza</h3>
+                <p>Fervenza do Toxa, Ferveda y senderos de agua con bosque autóctono para un plan activo sin trayectos largos.</p>
+              </article>
+              <article class="card plan-panel" data-plan-panel="plan-cultura" hidden>
+                <h3>Cultura</h3>
+                <p>Puentes medievales, iglesias románicas y monasterios como Aciveiro o Carboeiro para un recorrido histórico.</p>
+              </article>
+              <article class="card plan-panel" data-plan-panel="plan-tranquila" hidden>
+                <h3>Escapada tranquila</h3>
+                <p>Combina jardín, descanso y paseos por aldeas y miradores del entorno rural gallego sin prisas.</p>
+              </article>
+            </div>
           </div>
         </section>
 

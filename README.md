@@ -56,3 +56,15 @@ Después abre la URL local que te muestre `serve`.
 
 - Español: rutas raíz (`/`, `/sobre-la-casa/`, etc.)
 - Inglés: rutas bajo `/en/` (`/en/`, `/en/contacto/`, etc.)
+
+## Documentación para agentes AI
+
+- Punto de entrada: `agents.md`
+- Guías detalladas: carpeta `docs/`
+  - `docs/00-PROYECTO-CONTEXTO.md`
+  - `docs/01-ARQUITECTURA.md`
+  - `docs/02-CONTENIDO-Y-COPY.md`
+  - `docs/03-I18N-Y-RUTAS.md`
+  - `docs/04-UX-Y-COMPONENTES.md`
+  - `docs/05-QA-Y-OPERACION.md`
+  - `docs/06-PLAYBOOK-CAMBIOS.md`
