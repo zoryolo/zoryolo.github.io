@@ -269,6 +269,7 @@
 
     const whatsappLink = form.querySelector("[data-assistant-whatsapp]");
     const feedback = form.querySelector("[data-assistant-feedback]");
+    const previewWrap = form.querySelector("[data-assistant-summary]");
     const preview = form.querySelector("[data-assistant-preview]");
     const checkin = form.querySelector('[name="checkin"]');
     const checkout = form.querySelector('[name="checkout"]');
@@ -276,7 +277,7 @@
     const stayType = form.querySelector('[name="stayType"]');
     const apartment = form.querySelector('[name="apartment"]');
 
-    if (!whatsappLink || !feedback || !preview) return;
+    if (!whatsappLink || !feedback || !preview || !previewWrap) return;
 
     const fallbackText = isEnglish ? "to be confirmed" : "por confirmar";
     const defaultStayType = isEnglish ? "to be confirmed" : "por confirmar";
@@ -338,7 +339,8 @@
 
       return {
         message,
-        errors
+        errors,
+        hasBothDates: hasCheckin && hasCheckout
       };
     }
 
@@ -348,11 +350,13 @@
       whatsappLink.href = buildWhatsappUrl(payload.message);
 
       if (payload.errors.length) {
+        previewWrap.hidden = true;
         feedback.textContent = payload.errors.join(" ");
         feedback.classList.add("assistant-feedback--error");
         return false;
       }
 
+      previewWrap.hidden = !payload.hasBothDates;
       feedback.textContent = "";
       feedback.classList.remove("assistant-feedback--error");
       return true;
