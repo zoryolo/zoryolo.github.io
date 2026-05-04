@@ -554,10 +554,6 @@
       {
         url: "/images-web/apartamentos1.jpg",
         alt: isEnglish ? "Garden area by the apartments" : "Zona ajardinada de apartamentos"
-      },
-      {
-        url: "/images-web/lostressoles.jpg",
-        alt: "Los Tres Soles"
       }
     ];
 
