@@ -477,6 +477,34 @@ body.menu-open {
   display: block;
 }
 
+.mono-icon {
+  width: 1.08rem;
+  height: 1.08rem;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.mono-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mono-icon--lg {
+  width: 1.32rem;
+  height: 1.32rem;
+}
+
+.amenity-compact .mono-icon {
+  color: var(--ceramic);
+}
+
 .btn-whatsapp {
   background: #1fa75b;
   border-color: #1fa75b;
