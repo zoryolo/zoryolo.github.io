@@ -193,16 +193,36 @@
         </section>
 
         <section class="section-padding section-muted">
-          <div class="container-custom trust-grid trust-grid-featured">
-            <article class="card reveal trust-card trust-card-reviews card-cta">
-              <p class="editorial-kicker">Confianza real</p>
-              <h3>Reseñas reales en Google Maps</h3>
-              <p>Los huéspedes destacan especialmente la limpieza, el trato cercano y la tranquilidad del entorno.</p>
-              <p class="review-quote">Consulta opiniones actualizadas antes de reservar.</p>
-              <div class="btn-center-wrap card-actions card-actions--separated card-actions--push">
-                <a class="btn btn-outline" href="https://maps.app.goo.gl/cpG7gEozG1e9p87j7" target="_blank" rel="noopener noreferrer">Ver reseñas en Google Maps</a>
+          <div class="container-custom">
+            <article class="card reveal reviews-showcase" aria-labelledby="reviews-title-es">
+              <div class="reviews-showcase__head">
+                <p class="editorial-kicker">Opiniones verificadas</p>
+                <h2 id="reviews-title-es">Lo que dicen nuestros huéspedes</h2>
+                <p class="reviews-showcase__microcopy">Opiniones reales publicadas en Google Maps</p>
+              </div>
+              <div class="reviews-showcase__summary" aria-label="Valoración media 4,7 sobre 5 basada en 41 reseñas en Google">
+                <p class="reviews-score">4,7 <span>/ 5</span></p>
+                <p class="reviews-stars" aria-hidden="true">★★★★★</p>
+                <p class="reviews-count">41 reseñas en Google</p>
+              </div>
+              <div class="reviews-carousel" data-reviews-carousel>
+                <div class="reviews-carousel__viewport" data-reviews-viewport tabindex="0" aria-label="Carrusel de reseñas de Google Maps">
+                  <div class="reviews-carousel__track" data-reviews-track></div>
+                </div>
+                <div class="reviews-carousel__footer">
+                  <div class="reviews-carousel__dots" data-reviews-dots aria-label="Paginación de reseñas"></div>
+                  <div class="reviews-carousel__arrows">
+                    <button type="button" class="reviews-carousel__arrow" data-reviews-prev aria-label="Ver reseñas anteriores">‹</button>
+                    <button type="button" class="reviews-carousel__arrow" data-reviews-next aria-label="Ver reseñas siguientes">›</button>
+                  </div>
+                </div>
+              </div>
+              <div class="btn-center-wrap card-actions card-actions--separated">
+                <a class="btn btn-outline" href="https://maps.app.goo.gl/cpG7gEozG1e9p87j7" target="_blank" rel="noopener noreferrer">Ver todas en Google Maps</a>
               </div>
             </article>
+          </div>
+          <div class="container-custom trust-direct-wrap">
             <article class="card reveal trust-card trust-card-direct card-cta">
               <p class="editorial-kicker">Reserva directa</p>
               <h3>Reserva directa, sin intermediarios</h3>

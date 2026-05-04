@@ -26,6 +26,72 @@
   const siteHeader = document.querySelector(".site-header");
   const isHomePage = document.body.dataset.page === "home";
   const whatsappNumber = "34609829072";
+  const reviewCatalog = {
+    es: [
+      {
+        author: "Enrique",
+        rating: 5,
+        text: "Lugar excepcional, apartado del ruido y la aglomeración. Mercedes, la casera, un encanto. Si quieres o tienes que desconectar, este es el sitio."
+      },
+      {
+        author: "Carmen",
+        rating: 5,
+        text: "Apartamento con encanto a las afueras de Silleda, muy recomendable para ir en familia: amplio, muy limpio, con todas las comodidades y jardines preciosos."
+      },
+      {
+        author: "María",
+        rating: 5,
+        text: "La dueña muy amable y el apartamento cómodo en un enclave tranquilo y cuidado, ideal para descansar y céntrico para hacer excursiones."
+      },
+      {
+        author: "Clara",
+        rating: 5,
+        text: "Maravilloso lugar y maravillosa Mercedes. Un sitio extraordinario, perfecto para descansar y conectar."
+      },
+      {
+        author: "Mónica",
+        rating: 5,
+        text: "El apartamento limpísimo, el trato de la dueña inmejorable y el entorno precioso. Volveremos."
+      },
+      {
+        author: "Alfonso",
+        rating: 5,
+        text: "Mercedes es un encanto, todo amabilidad. Es la segunda vez que venimos."
+      }
+    ],
+    en: [
+      {
+        author: "Enrique",
+        rating: 5,
+        text: "Lugar excepcional, apartado del ruido y la aglomeración. Mercedes, la casera, un encanto. Si quieres o tienes que desconectar, este es el sitio."
+      },
+      {
+        author: "Carmen",
+        rating: 5,
+        text: "Apartamento con encanto a las afueras de Silleda, muy recomendable para ir en familia: amplio, muy limpio, con todas las comodidades y jardines preciosos."
+      },
+      {
+        author: "María",
+        rating: 5,
+        text: "La dueña muy amable y el apartamento cómodo en un enclave tranquilo y cuidado, ideal para descansar y céntrico para hacer excursiones."
+      },
+      {
+        author: "Clara",
+        rating: 5,
+        text: "Maravilloso lugar y maravillosa Mercedes. Un sitio extraordinario, perfecto para descansar y conectar."
+      },
+      {
+        author: "Mónica",
+        rating: 5,
+        text: "El apartamento limpísimo, el trato de la dueña inmejorable y el entorno precioso. Volveremos."
+      },
+      {
+        author: "Alfonso",
+        rating: 5,
+        text: "Mercedes es un encanto, todo amabilidad. Es la segunda vez que venimos."
+      }
+    ]
+  };
 
   if (menuOpen && mobilePanel) {
     menuOpen.setAttribute("aria-expanded", "false");
@@ -282,6 +348,7 @@
     const fallbackText = isEnglish ? "to be confirmed" : "por confirmar";
     const defaultStayType = isEnglish ? "to be confirmed" : "por confirmar";
     const defaultApartment = isEnglish ? "not sure, I would like a recommendation" : "no lo sé, me gustaría recomendación";
+    let hasAttemptedWhatsapp = false;
 
     function getValue(input) {
       return input && typeof input.value === "string" ? input.value.trim() : "";
@@ -344,15 +411,20 @@
       };
     }
 
-    function renderAssistantResult() {
+    function renderAssistantResult(showErrors) {
       const payload = buildAssistantPayload();
       preview.textContent = payload.message;
       whatsappLink.href = buildWhatsappUrl(payload.message);
 
       if (payload.errors.length) {
         previewWrap.hidden = true;
-        feedback.textContent = payload.errors.join(" ");
-        feedback.classList.add("assistant-feedback--error");
+        if (showErrors) {
+          feedback.textContent = payload.errors.join(" ");
+          feedback.classList.add("assistant-feedback--error");
+        } else {
+          feedback.textContent = "";
+          feedback.classList.remove("assistant-feedback--error");
+        }
         return false;
       }
 
@@ -363,7 +435,8 @@
     }
 
     whatsappLink.addEventListener("click", (event) => {
-      const isValid = renderAssistantResult();
+      hasAttemptedWhatsapp = true;
+      const isValid = renderAssistantResult(true);
       if (!isValid) {
         event.preventDefault();
       }
@@ -371,11 +444,11 @@
 
     [checkin, checkout, guests, stayType, apartment].forEach((field) => {
       if (!field) return;
-      field.addEventListener("input", renderAssistantResult);
-      field.addEventListener("change", renderAssistantResult);
+      field.addEventListener("input", () => renderAssistantResult(hasAttemptedWhatsapp));
+      field.addEventListener("change", () => renderAssistantResult(hasAttemptedWhatsapp));
     });
 
-    renderAssistantResult();
+    renderAssistantResult(false);
   }
 
   function initLocationPlanSelector() {
@@ -606,6 +679,164 @@
     startAutoplay();
   }
 
+  function initReviewsCarousel() {
+    const root = document.querySelector("[data-reviews-carousel]");
+    if (!root) return;
+
+    const viewport = root.querySelector("[data-reviews-viewport]");
+    const track = root.querySelector("[data-reviews-track]");
+    const dotsWrap = root.querySelector("[data-reviews-dots]");
+    const prevBtn = root.querySelector("[data-reviews-prev]");
+    const nextBtn = root.querySelector("[data-reviews-next]");
+    if (!viewport || !track || !dotsWrap || !prevBtn || !nextBtn) return;
+
+    const reviews = reviewCatalog[isEnglish ? "en" : "es"] || reviewCatalog.es;
+    if (!reviews.length) return;
+
+    viewport.setAttribute("aria-roledescription", isEnglish ? "carousel" : "carrusel");
+    viewport.setAttribute("aria-live", "polite");
+
+    track.innerHTML = "";
+    reviews.forEach((review) => {
+      const card = document.createElement("article");
+      card.className = "review-card";
+      card.innerHTML = `
+        <div class="review-card__head">
+          <p class="review-card__author-head">${review.author}</p>
+          <p class="review-card__stars-head" aria-label="${isEnglish ? `${review.rating} out of 5 stars` : `${review.rating} de 5 estrellas`}">${"★".repeat(review.rating)}</p>
+        </div>
+        <p class="review-card__text">"${review.text}"</p>
+      `;
+      track.appendChild(card);
+    });
+
+    const cards = Array.from(track.querySelectorAll(".review-card"));
+    let pageIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    function getVisibleCards() {
+      const rawValue = Number.parseInt(getComputedStyle(root).getPropertyValue("--reviews-visible"), 10);
+      return Number.isFinite(rawValue) && rawValue > 0 ? rawValue : 1;
+    }
+
+    function getPageCount() {
+      return Math.max(1, Math.ceil(cards.length / getVisibleCards()));
+    }
+
+    function getPageOffset(currentPage) {
+      const firstCardIndex = Math.min(cards.length - 1, currentPage * getVisibleCards());
+      const targetCard = cards[firstCardIndex];
+      return targetCard ? targetCard.offsetLeft : 0;
+    }
+
+    function buildDots(pageCount) {
+      dotsWrap.innerHTML = "";
+      for (let idx = 0; idx < pageCount; idx += 1) {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "reviews-carousel__dot";
+        dot.setAttribute("aria-label", isEnglish ? `Go to review page ${idx + 1}` : `Ir a la página ${idx + 1} de reseñas`);
+        dot.addEventListener("click", () => {
+          pageIndex = idx;
+          render();
+        });
+        dotsWrap.appendChild(dot);
+      }
+    }
+
+    function render() {
+      const pageCount = getPageCount();
+      if (pageIndex > pageCount - 1) {
+        pageIndex = pageCount - 1;
+      }
+      if (pageIndex < 0) {
+        pageIndex = 0;
+      }
+
+      const offsetX = getPageOffset(pageIndex);
+      track.style.transform = `translateX(${-offsetX}px)`;
+
+      const dots = dotsWrap.querySelectorAll(".reviews-carousel__dot");
+      dots.forEach((dot, idx) => {
+        const active = idx === pageIndex;
+        dot.setAttribute("aria-current", active ? "true" : "false");
+      });
+
+      prevBtn.disabled = pageIndex === 0;
+      nextBtn.disabled = pageIndex >= pageCount - 1;
+    }
+
+    function nextPage() {
+      pageIndex += 1;
+      render();
+    }
+
+    function prevPage() {
+      pageIndex -= 1;
+      render();
+    }
+
+    prevBtn.addEventListener("click", prevPage);
+    nextBtn.addEventListener("click", nextPage);
+
+    viewport.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        nextPage();
+      } else if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        prevPage();
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        pageIndex = 0;
+        render();
+      } else if (event.key === "End") {
+        event.preventDefault();
+        pageIndex = getPageCount() - 1;
+        render();
+      }
+    });
+
+    viewport.addEventListener(
+      "touchstart",
+      (event) => {
+        const firstTouch = event.changedTouches[0];
+        touchStartX = firstTouch.clientX;
+        touchStartY = firstTouch.clientY;
+      },
+      { passive: true }
+    );
+
+    viewport.addEventListener("touchend", (event) => {
+      const lastTouch = event.changedTouches[0];
+      const deltaX = lastTouch.clientX - touchStartX;
+      const deltaY = lastTouch.clientY - touchStartY;
+      const minSwipe = 40;
+
+      if (Math.abs(deltaX) < minSwipe || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+      if (deltaX < 0) {
+        nextPage();
+      } else {
+        prevPage();
+      }
+    });
+
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      if (resizeTimer) window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        const pageCount = getPageCount();
+        buildDots(pageCount);
+        render();
+      }, 100);
+    });
+
+    buildDots(getPageCount());
+    render();
+  }
+
   function initDialogImageZoom(dialog, imageElement) {
     if (!dialog || !imageElement || imageElement.dataset.zoomReady === "1") return;
 
@@ -756,6 +987,7 @@
   }
 
   initHomeCarousel();
+  initReviewsCarousel();
   initGalleryLightbox();
   initGlobalImageLightbox();
   initMobileStickyCta();
