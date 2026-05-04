@@ -87,16 +87,15 @@
         </section>
 
         <section class="section-padding">
-          <div class="container-custom grid-2" style="align-items:start;">
-            <article class="card reveal" style="padding:1.5rem;">
+          <div class="container-custom grid-2">
+            <article class="card reveal card-cta" style="padding:1.5rem;">
               <h2>Ubicación estratégica para recorrer Galicia</h2>
               <div class="split-list" style="margin-top:0.8rem;">
                 <p>Santiago de Compostela (~30 min), Ourense (~40 min), Pontevedra y costa (~60 min), Lalín (~15 min).</p>
                 <p>Ideal para combinar descanso rural con cultura, naturaleza y gastronomía sin trayectos largos cada día.</p>
               </div>
-              <div class="btn-center-wrap btn-center-wrap--location">
+              <div class="btn-center-wrap btn-center-wrap--location card-actions card-actions--separated">
                 <a class="btn btn-outline" href="https://maps.google.com/?q=42.687801,-8.273509" target="_blank" rel="noopener noreferrer">Abrir Google Maps</a>
-                <a class="btn btn-outline" href="https://www.openstreetmap.org/?mlat=42.687801&mlon=-8.273509#map=15/42.687801/-8.273509" target="_blank" rel="noopener noreferrer">Abrir OpenStreetMap</a>
               </div>
             </article>
 
@@ -142,13 +141,16 @@
             <p>Selecciona el tipo de escapada y te mostramos una propuesta base</p>
           </div>
           <div class="container-custom reveal plan-selector-shell" data-plan-selector>
-            <div class="plan-selector" role="tablist" aria-label="Tipos de plan">
-              <button class="plan-option is-active" type="button" data-plan-btn="plan-1dia" aria-pressed="true">1 día</button>
-              <button class="plan-option" type="button" data-plan-btn="plan-2dias" aria-pressed="false">2 días</button>
-              <button class="plan-option" type="button" data-plan-btn="plan-naturaleza" aria-pressed="false">Naturaleza</button>
-              <button class="plan-option" type="button" data-plan-btn="plan-cultura" aria-pressed="false">Cultura</button>
-              <button class="plan-option" type="button" data-plan-btn="plan-tranquila" aria-pressed="false">Escapada tranquila</button>
+            <div class="plan-selector-rail">
+              <div class="plan-selector" role="tablist" aria-label="Tipos de plan">
+                <button class="plan-option is-active" type="button" data-plan-btn="plan-1dia" aria-pressed="true">1 día</button>
+                <button class="plan-option" type="button" data-plan-btn="plan-2dias" aria-pressed="false">2 días</button>
+                <button class="plan-option" type="button" data-plan-btn="plan-naturaleza" aria-pressed="false">Naturaleza</button>
+                <button class="plan-option" type="button" data-plan-btn="plan-cultura" aria-pressed="false">Cultura</button>
+                <button class="plan-option" type="button" data-plan-btn="plan-tranquila" aria-pressed="false">Escapada tranquila</button>
+              </div>
             </div>
+            <p class="plan-selector-hint">Desliza para ver más opciones →</p>
             <div class="plan-panels">
               <article class="card plan-panel" data-plan-panel="plan-1dia">
                 <h3>1 día: esencia de la zona</h3>

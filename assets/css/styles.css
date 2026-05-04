@@ -404,9 +404,11 @@ body.menu-open {
   gap: 0.45rem;
   border-radius: 999px;
   border: 1px solid transparent;
-  padding: 0.78rem 1.12rem;
+  min-height: 44px;
+  padding: 0.84rem 1.2rem;
   font-size: 0.95rem;
   font-weight: 600;
+  line-height: 1.2;
   cursor: pointer;
   transition: all 150ms ease;
 }
@@ -460,8 +462,8 @@ body.menu-open {
 }
 
 .action-icon {
-  width: 1em;
-  height: 1em;
+  width: 1.08em;
+  height: 1.08em;
   display: inline-grid;
   place-items: center;
   flex-shrink: 0;
@@ -474,38 +476,73 @@ body.menu-open {
 }
 
 .btn-whatsapp {
-  background: #128c7e;
-  border-color: #128c7e;
+  background: #1fa75b;
+  border-color: #1fa75b;
   color: #fff;
 }
 
 .btn-whatsapp:hover {
-  background: #0f7367;
-  border-color: #0f7367;
+  background: #1a924f;
+  border-color: #1a924f;
+}
+
+.btn-whatsapp:active {
+  background: #157f44;
+  border-color: #157f44;
 }
 
 .btn-maps {
-  border-color: #2b7de9;
-  background: color-mix(in srgb, #2b7de9 11%, #fff 89%);
-  color: #1f5fb8;
+  border-color: #1a73e8;
+  background: #1a73e8;
+  color: #fff;
 }
 
 .btn-maps:hover {
-  background: color-mix(in srgb, #2b7de9 18%, #fff 82%);
+  border-color: #1765cc;
+  background: #1765cc;
+}
+
+.btn-maps:active {
+  border-color: #1558b0;
+  background: #1558b0;
 }
 
 .btn-call {
-  border-color: color-mix(in srgb, var(--foreground) 20%, var(--border) 80%);
+  border-color: #b2623f;
+  background: #b2623f;
+  color: #fff;
 }
 
 .btn-call:hover {
-  background: color-mix(in srgb, var(--foreground) 6%, #fff 94%);
+  border-color: #9b5032;
+  background: #9b5032;
+}
+
+.btn-call:active {
+  border-color: #88452b;
+  background: #88452b;
 }
 
 .btn-ghost-light.btn-call:hover {
-  background: rgb(255 255 255 / 22%);
-  border-color: rgb(255 255 255 / 62%);
+  background: rgb(255 255 255 / 28%);
+  border-color: rgb(255 255 255 / 72%);
   color: #fff;
+}
+
+.btn-dates {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.btn-dates:hover {
+  background: #9b5032;
+  border-color: #9b5032;
+}
+
+.btn-dates:active {
+  background: #88452b;
+  border-color: #88452b;
 }
 
 .btn-mail {
@@ -1118,6 +1155,53 @@ body.menu-open {
   text-align: center;
 }
 
+.card-cta {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-actions {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.card-cta .card-actions {
+  margin-top: auto;
+}
+
+.card-actions.btn-center-wrap:not(.card-actions--separated) {
+  margin-top: 0;
+}
+
+.card-actions--separated {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, var(--border) 82%, #fff 18%);
+}
+
+.card-actions--push {
+  margin-top: auto;
+}
+
+.card-actions .btn {
+  min-height: 52px;
+  padding-inline: 1.15rem;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.2;
+}
+
 .trust-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1296,17 +1380,28 @@ body.menu-open {
 }
 
 .sticky-action-dates {
-  background: var(--primary);
+  background: #4f6f7d;
+  border-color: #4f6f7d;
   color: #fff;
 }
 
+.sticky-action-dates:hover {
+  background: #435f6b;
+  border-color: #435f6b;
+}
+
+.sticky-action-dates:active {
+  background: #384f59;
+  border-color: #384f59;
+}
+
 .sticky-action-whatsapp {
-  background: #128c7e;
+  background: #1fa75b;
   color: #fff;
 }
 
 .sticky-action-call {
-  background: var(--foreground);
+  background: #9b5032;
   color: #fff;
 }
 
@@ -1527,22 +1622,53 @@ body.menu-open .mobile-sticky-cta {
   font-size: 0.86rem;
 }
 
-.apartment-body .btn {
+.apartment-body .card-actions {
   margin-top: auto;
-  align-self: center;
 }
 
 .plan-selector-shell {
   display: grid;
   gap: 1rem;
+  overflow: hidden;
+  min-width: 0;
 }
 
 .plan-selector {
   display: flex;
   gap: 0.55rem;
   overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
   padding-bottom: 0.2rem;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+}
+
+.plan-selector-rail {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.plan-selector-rail::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(248 242 233 / 0%), rgb(248 242 233 / 95%));
+  pointer-events: none;
+}
+
+.plan-selector-hint {
+  margin-top: -0.1rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--ceramic) 65%, var(--muted-foreground) 35%);
 }
 
 .plan-option {
@@ -1617,6 +1743,15 @@ body.menu-open .mobile-sticky-cta {
     justify-content: center;
   }
 
+  .card-actions .btn {
+    min-height: 50px;
+    width: auto;
+  }
+
+  .card-actions.btn-center-wrap--compact .btn {
+    flex: 1 1 220px;
+  }
+
   .editorial-actions {
     justify-content: center;
   }
@@ -1686,6 +1821,14 @@ body.menu-open .mobile-sticky-cta {
     gap: 1.5rem;
   }
 
+  .plan-selector-hint {
+    display: none;
+  }
+
+  .plan-selector-rail::after {
+    display: none;
+  }
+
   .grid-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
@@ -1724,6 +1867,16 @@ body.menu-open .mobile-sticky-cta {
     padding-bottom: 92px;
   }
 
+  .card-actions .btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 56px;
+  }
+
+  .card-actions.btn-center-wrap--compact .btn {
+    flex: 1 1 100%;
+  }
+
   .hero-content h1 {
     font-size: clamp(2.2rem, 12vw, 3.2rem);
   }
@@ -1745,6 +1898,16 @@ body.menu-open .mobile-sticky-cta {
     gap: 0.55rem;
   }
 
+  .plan-selector {
+    padding-right: 0.9rem;
+  }
+
+}
+
+@media (min-width: 390px) and (max-width: 767px) {
+  .card-actions.btn-center-wrap--compact .btn {
+    flex: 1 1 calc(50% - 0.35rem);
+  }
 }
 
 @media (max-width: 430px) {

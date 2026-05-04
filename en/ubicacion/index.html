@@ -87,16 +87,15 @@
         </section>
 
         <section class="section-padding">
-          <div class="container-custom grid-2" style="align-items:start;">
-            <article class="card reveal" style="padding:1.5rem;">
+          <div class="container-custom grid-2">
+            <article class="card reveal card-cta" style="padding:1.5rem;">
               <h2>Strategic location to explore Galicia</h2>
               <div class="split-list" style="margin-top:0.8rem;">
                 <p>Santiago de Compostela (~30 min), Ourense (~40 min), Pontevedra and coast (~60 min), Lalín (~15 min).</p>
                 <p>Perfect to combine rural relaxation with culture, nature and gastronomy without long daily transfers.</p>
               </div>
-              <div class="btn-center-wrap btn-center-wrap--location">
+              <div class="btn-center-wrap btn-center-wrap--location card-actions card-actions--separated">
                 <a class="btn btn-outline" href="https://maps.google.com/?q=42.687801,-8.273509" target="_blank" rel="noopener noreferrer">Open Google Maps</a>
-                <a class="btn btn-outline" href="https://www.openstreetmap.org/?mlat=42.687801&mlon=-8.273509#map=15/42.687801/-8.273509" target="_blank" rel="noopener noreferrer">Open OpenStreetMap</a>
               </div>
             </article>
 
@@ -142,13 +141,16 @@
             <p>Select your trip style and we will show a practical base plan</p>
           </div>
           <div class="container-custom reveal plan-selector-shell" data-plan-selector>
-            <div class="plan-selector" role="tablist" aria-label="Trip plan types">
-              <button class="plan-option is-active" type="button" data-plan-btn="plan-1day" aria-pressed="true">1 day</button>
-              <button class="plan-option" type="button" data-plan-btn="plan-2days" aria-pressed="false">2 days</button>
-              <button class="plan-option" type="button" data-plan-btn="plan-nature" aria-pressed="false">Nature</button>
-              <button class="plan-option" type="button" data-plan-btn="plan-culture" aria-pressed="false">Culture</button>
-              <button class="plan-option" type="button" data-plan-btn="plan-quiet" aria-pressed="false">Quiet getaway</button>
+            <div class="plan-selector-rail">
+              <div class="plan-selector" role="tablist" aria-label="Trip plan types">
+                <button class="plan-option is-active" type="button" data-plan-btn="plan-1day" aria-pressed="true">1 day</button>
+                <button class="plan-option" type="button" data-plan-btn="plan-2days" aria-pressed="false">2 days</button>
+                <button class="plan-option" type="button" data-plan-btn="plan-nature" aria-pressed="false">Nature</button>
+                <button class="plan-option" type="button" data-plan-btn="plan-culture" aria-pressed="false">Culture</button>
+                <button class="plan-option" type="button" data-plan-btn="plan-quiet" aria-pressed="false">Quiet getaway</button>
+              </div>
             </div>
+            <p class="plan-selector-hint">Swipe to see more options →</p>
             <div class="plan-panels">
               <article class="card plan-panel" data-plan-panel="plan-1day">
                 <h3>1 day: area essentials</h3>

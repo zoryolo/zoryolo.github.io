@@ -190,7 +190,7 @@
       if (link.classList.contains("btn")) link.classList.add("btn-whatsapp");
     });
 
-    const mapLinks = document.querySelectorAll('a[href*="maps.google.com"], a[href*="maps.app.goo.gl"], a[href*="openstreetmap.org"]');
+    const mapLinks = document.querySelectorAll('a[href*="maps.google.com"], a[href*="maps.app.goo.gl"]');
     mapLinks.forEach((link) => {
       link.classList.add("action-link", "action-maps");
       addActionIcon(link, "maps");
