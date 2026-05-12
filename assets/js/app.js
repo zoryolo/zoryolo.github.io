@@ -329,6 +329,43 @@
     });
   }
 
+  function initApartmentCollapsibles() {
+    const cards = document.querySelectorAll(".apartment-collapsible");
+    if (!cards.length) return;
+
+    const labelOpen = isEnglish ? "Hide" : "Ocultar";
+    const labelClosed = isEnglish ? "Show" : "Mostrar";
+
+    cards.forEach((card, idx) => {
+      const toggle = card.querySelector("[data-apartment-toggle]");
+      const content = card.querySelector("[data-apartment-content]");
+      const label = card.querySelector("[data-apartment-toggle-label]");
+      const icon = card.querySelector("[data-apartment-toggle-icon]");
+      if (!toggle || !content) return;
+
+      if (!content.id) {
+        content.id = `apartment-collapsible-content-${idx + 1}`;
+      }
+      toggle.setAttribute("aria-controls", content.id);
+
+      function setExpanded(expanded) {
+        toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+        content.hidden = !expanded;
+        card.classList.toggle("is-collapsed", !expanded);
+        if (label) label.textContent = expanded ? labelOpen : labelClosed;
+        if (icon) icon.textContent = expanded ? "−" : "+";
+      }
+
+      const isInitiallyExpanded = toggle.getAttribute("aria-expanded") !== "false";
+      setExpanded(isInitiallyExpanded);
+
+      toggle.addEventListener("click", () => {
+        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+        setExpanded(!isExpanded);
+      });
+    });
+  }
+
   function initStayAssistant() {
     const form = document.querySelector("[data-stay-assistant]");
     if (!form) return;
@@ -504,6 +541,156 @@
     observer.observe(hero);
   }
 
+  function attachSwipeNavigation(target, config) {
+    if (!target) return;
+
+    const minSwipe = Number.isFinite(config?.minSwipe) ? config.minSwipe : 34;
+    const flickDistance = Number.isFinite(config?.flickDistance) ? config.flickDistance : 16;
+    const maxFlickMs = Number.isFinite(config?.maxFlickMs) ? config.maxFlickMs : 220;
+    const onPrev = typeof config?.onPrev === "function" ? config.onPrev : null;
+    const onNext = typeof config?.onNext === "function" ? config.onNext : null;
+    const onAfter = typeof config?.onAfter === "function" ? config.onAfter : null;
+    const allowSwipe = typeof config?.allowSwipe === "function" ? config.allowSwipe : () => true;
+
+    let startX = 0;
+    let startY = 0;
+    let startAt = 0;
+    let tracking = false;
+    let horizontalIntent = false;
+
+    target.addEventListener(
+      "touchstart",
+      (event) => {
+        if (event.touches.length !== 1) return;
+        if (!allowSwipe()) return;
+        const touch = event.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+        startAt = Date.now();
+        tracking = true;
+        horizontalIntent = false;
+      },
+      { passive: true }
+    );
+
+    target.addEventListener(
+      "touchmove",
+      (event) => {
+        if (!tracking) return;
+        const touch = event.touches[0];
+        const deltaX = touch.clientX - startX;
+        const deltaY = touch.clientY - startY;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+
+        if (!horizontalIntent) {
+          if (absX > 10 && absX > absY * 1.1) {
+            horizontalIntent = true;
+          } else if (absY > 12 && absY > absX) {
+            tracking = false;
+            return;
+          }
+        }
+
+        if (horizontalIntent) event.preventDefault();
+      },
+      { passive: false }
+    );
+
+    target.addEventListener(
+      "touchend",
+      (event) => {
+        if (!tracking) return;
+        tracking = false;
+        if (!allowSwipe()) return;
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - startX;
+        const deltaY = touch.clientY - startY;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        const elapsed = Date.now() - startAt;
+
+        if (absX <= absY) return;
+
+        const isRegularSwipe = absX >= minSwipe;
+        const isQuickFlick = absX >= flickDistance && elapsed <= maxFlickMs;
+        if (!isRegularSwipe && !isQuickFlick) return;
+
+        if (deltaX < 0) {
+          if (onNext) onNext();
+        } else if (onPrev) {
+          onPrev();
+        }
+        if (onAfter) onAfter();
+      },
+      { passive: true }
+    );
+
+    target.addEventListener(
+      "touchcancel",
+      () => {
+        tracking = false;
+        horizontalIntent = false;
+      },
+      { passive: true }
+    );
+  }
+
+  function showSwipeHint(container, config) {
+    if (!container) return;
+    const forceShow = Boolean(config?.forceShow);
+    if (!forceShow && !window.matchMedia("(pointer: coarse)").matches) return;
+
+    const text = config?.text || (isEnglish ? "Swipe to continue" : "Desliza para continuar");
+    const storageKey = config?.storageKey || "";
+
+    if (storageKey) {
+      try {
+        if (window.sessionStorage.getItem(storageKey) === "1") return;
+      } catch (error) {
+        // ignore storage failures (private mode or blocked storage)
+      }
+    }
+
+    let hint = container.querySelector(".swipe-hint");
+    if (!hint) {
+      hint = document.createElement("p");
+      hint.className = "swipe-hint";
+      hint.innerHTML = '<span class="swipe-hint__icon" aria-hidden="true">↔</span><span class="swipe-hint__text"></span>';
+      container.appendChild(hint);
+    }
+
+    const textNode = hint.querySelector(".swipe-hint__text");
+    if (textNode) textNode.textContent = text;
+
+    if (storageKey) {
+      try {
+        window.sessionStorage.setItem(storageKey, "1");
+      } catch (error) {
+        // ignore storage failures
+      }
+    }
+
+    const previousTimer = Number.parseInt(hint.dataset.hideTimer || "0", 10);
+    if (previousTimer) window.clearTimeout(previousTimer);
+
+    hint.classList.add("is-visible");
+    const hide = () => {
+      hint.classList.remove("is-visible");
+    };
+
+    const hideTimer = window.setTimeout(hide, 3000);
+    hint.dataset.hideTimer = String(hideTimer);
+
+    if (hint.dataset.dismissBound !== "1") {
+      const dismissOnInteraction = () => hide();
+      container.addEventListener("touchstart", dismissOnInteraction, { passive: true });
+      container.addEventListener("pointerdown", dismissOnInteraction, { passive: true });
+      hint.dataset.dismissBound = "1";
+    }
+  }
+
   function initHomeCarousel() {
     const image = document.getElementById("featured-image");
     const prev = document.getElementById("featured-prev");
@@ -514,53 +701,41 @@
 
     if (!image || !prev || !next || !indicators || !counter || !carousel) return;
 
-    const items = [
-      {
-        url: "/images-web/apartamentos2.jpg",
-        alt: isEnglish ? "Apartments at Los Tres Soles" : "Apartamentos de Los Tres Soles"
-      },
-      {
-        url: "/images-web/exterior1.jpg",
-        alt: isEnglish ? "Exterior of Los Tres Soles" : "Exterior de Los Tres Soles"
-      },
-      {
-        url: "/images-web/exterior2.jpg",
-        alt: isEnglish ? "Exterior of the property" : "Exterior de la finca"
-      },
-      {
-        url: "/images-web/exterior3.jpg",
-        alt: isEnglish ? "Outdoor area of Los Tres Soles" : "Zona exterior de Los Tres Soles"
-      },
-      {
-        url: "/images-web/exterior4.jpg",
-        alt: isEnglish ? "Rural setting around the house" : "Entorno exterior de la casa rural"
-      },
-      {
-        url: "/images-web/tressoles1.jpg",
-        alt: isEnglish ? "Details of Los Tres Soles" : "Detalle de Los Tres Soles"
-      },
-      {
-        url: "/images-web/tressoles2.jpg",
-        alt: isEnglish ? "Property view" : "Vista de la propiedad"
-      },
-      {
-        url: "/images-web/tressoles4.jpg",
-        alt: isEnglish ? "Corner of Los Tres Soles" : "Rincón de Los Tres Soles"
-      },
-      {
-        url: "/images-web/apartamentos4.jpg",
-        alt: isEnglish ? "Apartments inside the estate" : "Apartamentos en la finca"
-      },
-      {
-        url: "/images-web/apartamentos1.jpg",
-        alt: isEnglish ? "Garden area by the apartments" : "Zona ajardinada de apartamentos"
-      }
+    const exteriorFilenames = [
+      "exterior1.jpg",
+      "exterior2.png",
+      "exterior3.png",
+      "exterior4.jpeg",
+      "exterior5.png",
+      "exterior6.jpg",
+      "exterior8.jpg",
+      "exterior11.jpg",
+      "exterior12.jpg",
+      "exteriorestrella1.png",
+      "exteriorluna1.png",
+      "exteriorluna2.png",
+      "exteriorluna3.png",
+      "exteriorluna4.png",
+      "exteriorsol1.png"
     ];
+
+    const items = exteriorFilenames.map((filename, idx) => ({
+      url: `/images-web/${filename}`,
+      alt: isEnglish
+        ? `Exterior photo ${idx + 1} of Los Tres Soles`
+        : `Foto exterior ${idx + 1} de Los Tres Soles`
+    }));
 
     let index = 0;
     let timer = null;
     let pauseTimeout = null;
     const pauseMs = 8000;
+    let lightboxDialog = null;
+    let lightboxImage = null;
+    let lightboxPrev = null;
+    let lightboxNext = null;
+    let lightboxClose = null;
+    let lightboxCounter = null;
 
     function render() {
       image.src = items[index].url;
@@ -615,6 +790,115 @@
       }, pauseMs);
     }
 
+    function resetLightboxZoomState() {
+      if (!lightboxImage) return;
+      lightboxImage.style.transform = "scale(1)";
+      lightboxImage.style.transformOrigin = "center center";
+      lightboxImage.classList.remove("zoomed");
+    }
+
+    function renderLightbox() {
+      if (!lightboxImage || !lightboxCounter) return;
+      lightboxImage.src = items[index].url;
+      lightboxImage.alt = items[index].alt;
+      lightboxCounter.textContent = `${index + 1} / ${items.length}`;
+      resetLightboxZoomState();
+    }
+
+    function closeLightbox() {
+      if (lightboxDialog && lightboxDialog.open) lightboxDialog.close();
+    }
+
+    function initCarouselLightbox() {
+      const existing = document.getElementById("featured-lightbox");
+      lightboxDialog = existing || document.createElement("dialog");
+
+      if (!existing) {
+        lightboxDialog.id = "featured-lightbox";
+        lightboxDialog.className = "lightbox";
+        lightboxDialog.innerHTML =
+          '<div class="lightbox-body lightbox-body--carousel">' +
+          `<button class="lightbox-close" aria-label="${isEnglish ? "Close" : "Cerrar"}">✕</button>` +
+          `<button class="lightbox-nav lightbox-nav--prev" aria-label="${isEnglish ? "Previous image" : "Imagen anterior"}">‹</button>` +
+          '<img src="" alt="" />' +
+          `<button class="lightbox-nav lightbox-nav--next" aria-label="${isEnglish ? "Next image" : "Imagen siguiente"}">›</button>` +
+          '<p class="lightbox-counter"></p>' +
+          "</div>";
+        document.body.appendChild(lightboxDialog);
+      }
+
+      lightboxImage = lightboxDialog.querySelector("img");
+      const lightboxBody = lightboxDialog.querySelector(".lightbox-body");
+      lightboxPrev = lightboxDialog.querySelector(".lightbox-nav--prev");
+      lightboxNext = lightboxDialog.querySelector(".lightbox-nav--next");
+      lightboxClose = lightboxDialog.querySelector(".lightbox-close");
+      lightboxCounter = lightboxDialog.querySelector(".lightbox-counter");
+
+      if (!lightboxImage || !lightboxBody || !lightboxPrev || !lightboxNext || !lightboxClose || !lightboxCounter) return;
+
+      initDialogImageZoom(lightboxDialog, lightboxImage);
+
+      const goPrevInLightbox = () => {
+        prevSlide();
+        renderLightbox();
+        pauseAutoplay();
+      };
+
+      const goNextInLightbox = () => {
+        nextSlide();
+        renderLightbox();
+        pauseAutoplay();
+      };
+
+      if (lightboxDialog.dataset.carouselSwipeBound !== "1") {
+        attachSwipeNavigation(lightboxBody, {
+          minSwipe: 30,
+          flickDistance: 14,
+          maxFlickMs: 240,
+          onNext: goNextInLightbox,
+          onPrev: goPrevInLightbox,
+          allowSwipe: () => lightboxDialog.open && !lightboxImage.classList.contains("zoomed")
+        });
+        lightboxDialog.dataset.carouselSwipeBound = "1";
+      }
+
+      if (lightboxDialog.dataset.carouselBound === "1") return;
+      lightboxDialog.dataset.carouselBound = "1";
+
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightboxPrev.addEventListener("click", (event) => {
+        event.stopPropagation();
+        goPrevInLightbox();
+      });
+      lightboxNext.addEventListener("click", (event) => {
+        event.stopPropagation();
+        goNextInLightbox();
+      });
+
+      lightboxDialog.addEventListener("click", (event) => {
+        const rect = lightboxDialog.getBoundingClientRect();
+        const outside =
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom;
+        if (outside) closeLightbox();
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (!lightboxDialog || !lightboxDialog.open) return;
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          goPrevInLightbox();
+          return;
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          goNextInLightbox();
+        }
+      });
+    }
+
     prev.addEventListener("click", () => {
       prevSlide();
       pauseAutoplay();
@@ -625,28 +909,13 @@
       pauseAutoplay();
     });
 
-    let touchStartX = 0;
-    let touchStartY = 0;
-    carousel.addEventListener("touchstart", (event) => {
-      const firstTouch = event.changedTouches[0];
-      touchStartX = firstTouch.clientX;
-      touchStartY = firstTouch.clientY;
-    }, { passive: true });
-
-    carousel.addEventListener("touchend", (event) => {
-      const lastTouch = event.changedTouches[0];
-      const deltaX = lastTouch.clientX - touchStartX;
-      const deltaY = lastTouch.clientY - touchStartY;
-      const minSwipe = 45;
-
-      if (Math.abs(deltaX) < minSwipe || Math.abs(deltaX) <= Math.abs(deltaY)) return;
-
-      if (deltaX < 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
-      pauseAutoplay();
+    attachSwipeNavigation(carousel, {
+      minSwipe: 30,
+      flickDistance: 14,
+      maxFlickMs: 240,
+      onNext: nextSlide,
+      onPrev: prevSlide,
+      onAfter: pauseAutoplay
     });
 
     let wheelLocked = false;
@@ -673,6 +942,23 @@
     buildIndicators();
     goTo(0);
     startAutoplay();
+    initCarouselLightbox();
+    showSwipeHint(carousel, {
+      text: isEnglish ? "Swipe to browse photos" : "Desliza para ver más fotos",
+      storageKey: "hint-home-carousel-swipe"
+    });
+    image.classList.add("zoomable-image");
+    image.addEventListener("click", () => {
+      if (!lightboxDialog) return;
+      renderLightbox();
+      lightboxDialog.showModal();
+      const lightboxBody = lightboxDialog.querySelector(".lightbox-body");
+      showSwipeHint(lightboxBody, {
+        text: isEnglish ? "Swipe or use arrows" : "Desliza o usa las flechas",
+        forceShow: true
+      });
+      pauseAutoplay();
+    });
   }
 
   function initReviewsCarousel() {
@@ -708,8 +994,6 @@
 
     const cards = Array.from(track.querySelectorAll(".review-card"));
     let pageIndex = 0;
-    let touchStartX = 0;
-    let touchStartY = 0;
 
     function getVisibleCards() {
       const rawValue = Number.parseInt(getComputedStyle(root).getPropertyValue("--reviews-visible"), 10);
@@ -888,23 +1172,95 @@
       dialog.id = "image-zoom";
       dialog.className = "lightbox";
       dialog.innerHTML =
-        '<div class="lightbox-body">' +
+        '<div class="lightbox-body lightbox-body--carousel">' +
         `<button class="lightbox-close" aria-label="${isEnglish ? "Close" : "Cerrar"}">✕</button>` +
+        `<button class="lightbox-nav lightbox-nav--prev" aria-label="${isEnglish ? "Previous image" : "Imagen anterior"}">‹</button>` +
         '<img src="" alt="" />' +
+        `<button class="lightbox-nav lightbox-nav--next" aria-label="${isEnglish ? "Next image" : "Imagen siguiente"}">›</button>` +
+        '<p class="lightbox-counter"></p>' +
         "</div>";
       document.body.appendChild(dialog);
     }
 
+    const body = dialog.querySelector(".lightbox-body");
     const imgEl = dialog.querySelector("img");
     const closeBtn = dialog.querySelector(".lightbox-close");
-    if (!imgEl || !closeBtn) return;
+    const prevBtn = dialog.querySelector(".lightbox-nav--prev");
+    const nextBtn = dialog.querySelector(".lightbox-nav--next");
+    const counter = dialog.querySelector(".lightbox-counter");
+    if (!body || !imgEl || !closeBtn || !prevBtn || !nextBtn || !counter) return;
     initDialogImageZoom(dialog, imgEl);
+
+    let lightboxItems = [];
+    let lightboxIndex = 0;
+
+    function resetDialogZoom() {
+      imgEl.style.transform = "scale(1)";
+      imgEl.style.transformOrigin = "center center";
+      imgEl.classList.remove("zoomed");
+    }
+
+    function renderImage() {
+      if (!lightboxItems.length) return;
+      const current = lightboxItems[lightboxIndex];
+      if (!current) return;
+
+      imgEl.src = current.url;
+      imgEl.alt = current.alt || (isEnglish ? "Enlarged image" : "Imagen ampliada");
+      counter.textContent = `${lightboxIndex + 1} / ${lightboxItems.length}`;
+      prevBtn.hidden = lightboxItems.length <= 1;
+      nextBtn.hidden = lightboxItems.length <= 1;
+      counter.hidden = lightboxItems.length <= 1;
+      resetDialogZoom();
+    }
+
+    function goTo(index) {
+      if (!lightboxItems.length) return;
+      lightboxIndex = (index + lightboxItems.length) % lightboxItems.length;
+      renderImage();
+    }
+
+    function nextImage() {
+      goTo(lightboxIndex + 1);
+    }
+
+    function prevImage() {
+      goTo(lightboxIndex - 1);
+    }
+
+    function buildItemFromImage(image) {
+      return {
+        image,
+        url: image.currentSrc || image.src,
+        alt: image.alt || ""
+      };
+    }
+
+    function getGalleryForImage(image) {
+      const apartmentCard = image.closest(".apartment-collapsible");
+      if (!apartmentCard) return [buildItemFromImage(image)];
+
+      const groupedImages = Array.from(apartmentCard.querySelectorAll("[data-apartment-content] img"))
+        .filter((candidate) => !candidate.closest("#featured-carousel") && !candidate.closest(".gallery-item"))
+        .map(buildItemFromImage);
+
+      return groupedImages.length ? groupedImages : [buildItemFromImage(image)];
+    }
 
     function closeDialog() {
       if (dialog.open) dialog.close();
     }
 
     closeBtn.addEventListener("click", closeDialog);
+    prevBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      prevImage();
+    });
+    nextBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      nextImage();
+    });
+
     dialog.addEventListener("click", (event) => {
       const rect = dialog.getBoundingClientRect();
       const outside =
@@ -916,54 +1272,156 @@
     });
 
     window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeDialog();
+      if (!dialog.open) return;
+      if (event.key === "Escape") {
+        closeDialog();
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        prevImage();
+        return;
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        nextImage();
+      }
+    });
+
+    attachSwipeNavigation(body, {
+      minSwipe: 30,
+      flickDistance: 14,
+      maxFlickMs: 240,
+      onNext: nextImage,
+      onPrev: prevImage,
+      allowSwipe: () => dialog.open && lightboxItems.length > 1 && !imgEl.classList.contains("zoomed")
     });
 
     const candidates = document.querySelectorAll("main img");
     candidates.forEach((img) => {
       if (img.closest(".gallery-item")) return;
+      if (img.closest("#featured-carousel")) return;
       if (img.closest("#lightbox")) return;
       if (img.closest("#image-zoom")) return;
 
       img.classList.add("zoomable-image");
       img.addEventListener("click", () => {
-        imgEl.src = img.currentSrc || img.src;
-        imgEl.alt = img.alt || (isEnglish ? "Enlarged image" : "Imagen ampliada");
+        lightboxItems = getGalleryForImage(img);
+        const startIndex = lightboxItems.findIndex((item) => item.image === img);
+        lightboxIndex = startIndex >= 0 ? startIndex : 0;
+        renderImage();
         dialog.showModal();
+        showSwipeHint(body, {
+          text: isEnglish ? "Swipe to see next photo" : "Desliza para ver la siguiente foto",
+          storageKey: "hint-apartment-lightbox-swipe"
+        });
       });
     });
   }
 
   function initGalleryLightbox() {
     const dialog = document.getElementById("lightbox");
+    const body = dialog ? dialog.querySelector(".lightbox-body") : null;
     const img = document.getElementById("lightbox-image");
     const tag = document.getElementById("lightbox-tag");
     const text = document.getElementById("lightbox-text");
     const close = document.getElementById("lightbox-close");
-    const items = document.querySelectorAll(".gallery-item");
+    const items = Array.from(document.querySelectorAll(".gallery-item"));
 
-    if (!dialog || !img || !tag || !text || !close || items.length === 0) return;
+    if (!dialog || !body || !img || !tag || !text || !close || items.length === 0) return;
+    body.classList.add("lightbox-body--carousel");
     initDialogImageZoom(dialog, img);
+
+    let prevBtn = document.getElementById("lightbox-prev");
+    let nextBtn = document.getElementById("lightbox-next");
+    let counter = dialog.querySelector(".lightbox-counter");
+
+    if (!prevBtn) {
+      prevBtn = document.createElement("button");
+      prevBtn.id = "lightbox-prev";
+      prevBtn.type = "button";
+      prevBtn.className = "lightbox-nav lightbox-nav--prev";
+      prevBtn.setAttribute("aria-label", isEnglish ? "Previous image" : "Imagen anterior");
+      prevBtn.textContent = "‹";
+      body.appendChild(prevBtn);
+    }
+
+    if (!nextBtn) {
+      nextBtn = document.createElement("button");
+      nextBtn.id = "lightbox-next";
+      nextBtn.type = "button";
+      nextBtn.className = "lightbox-nav lightbox-nav--next";
+      nextBtn.setAttribute("aria-label", isEnglish ? "Next image" : "Imagen siguiente");
+      nextBtn.textContent = "›";
+      body.appendChild(nextBtn);
+    }
+
+    if (!counter) {
+      counter = document.createElement("p");
+      counter.className = "lightbox-counter";
+      body.appendChild(counter);
+    }
+
+    const galleryItems = items.map((item) => {
+      const sourceImg = item.querySelector("img");
+      return {
+        full: item.dataset.full || "",
+        caption: item.dataset.caption || "",
+        category: item.dataset.category || "",
+        alt: sourceImg ? sourceImg.alt : item.dataset.caption || ""
+      };
+    });
+
+    let currentIndex = 0;
+
+    function renderFromIndex(index) {
+      if (!galleryItems.length) return;
+      currentIndex = (index + galleryItems.length) % galleryItems.length;
+      const current = galleryItems[currentIndex];
+      img.src = current.full;
+      img.alt = current.alt;
+      tag.textContent = current.category;
+      text.textContent = current.caption;
+      counter.textContent = `${currentIndex + 1} / ${galleryItems.length}`;
+      prevBtn.hidden = galleryItems.length <= 1;
+      nextBtn.hidden = galleryItems.length <= 1;
+      counter.hidden = galleryItems.length <= 1;
+    }
+
+    function openAt(index) {
+      renderFromIndex(index);
+      dialog.showModal();
+      showSwipeHint(body, {
+        text: isEnglish ? "Swipe or use arrows" : "Desliza o usa las flechas",
+        forceShow: true
+      });
+    }
+
+    function goPrev() {
+      renderFromIndex(currentIndex - 1);
+    }
+
+    function goNext() {
+      renderFromIndex(currentIndex + 1);
+    }
 
     function closeDialog() {
       if (dialog.open) dialog.close();
     }
 
     close.addEventListener("click", closeDialog);
+    prevBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      goPrev();
+    });
+    nextBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      goNext();
+    });
 
-    items.forEach((item) => {
+    items.forEach((item, index) => {
       item.addEventListener("click", () => {
-        const full = item.dataset.full;
-        const caption = item.dataset.caption || "";
-        const category = item.dataset.category || "";
-        const sourceImg = item.querySelector("img");
-
-        img.src = full;
-        img.alt = sourceImg ? sourceImg.alt : caption;
-        tag.textContent = category;
-        text.textContent = caption;
-
-        dialog.showModal();
+        openAt(index);
       });
     });
 
@@ -978,7 +1436,29 @@
     });
 
     window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeDialog();
+      if (!dialog.open) return;
+      if (event.key === "Escape") {
+        closeDialog();
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goPrev();
+        return;
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goNext();
+      }
+    });
+
+    attachSwipeNavigation(body, {
+      minSwipe: 30,
+      flickDistance: 14,
+      maxFlickMs: 240,
+      onNext: goNext,
+      onPrev: goPrev,
+      allowSwipe: () => dialog.open && galleryItems.length > 1 && !img.classList.contains("zoomed")
     });
   }
 
@@ -990,6 +1470,7 @@
   markActionLinks();
   initAssistantJumpLinks();
   initApartmentContextCtas();
+  initApartmentCollapsibles();
   initStayAssistant();
   initLocationPlanSelector();
   initMobileStickyCtaVisibility();

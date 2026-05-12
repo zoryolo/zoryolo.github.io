@@ -88,65 +88,122 @@
 
         <section class="section-padding">
           <div class="container-custom grid-2 contact-shell" style="margin-bottom:2rem;">
-            <article class="card reveal contact-panel card-cta" style="padding:1.5rem;">
-              <h2>Book via WhatsApp</h2>
-              <p style="margin-top:0.8rem;">Fastest way to check dates, final rate and the best apartment for your stay.</p>
-              <div class="split-list" style="margin-top:0.9rem;">
-                <p>• Quick and direct response</p>
-                <p>• Real-time availability confirmation</p>
-                <p>• Questions solved in one chat</p>
-              </div>
-              <div class="btn-center-wrap card-actions card-actions--separated card-actions--push">
-                <a class="btn btn-primary" href="https://wa.me/34609829072" target="_blank" rel="noopener noreferrer">Open WhatsApp</a>
-                <a class="btn btn-outline" href="tel:+34609829072">Call: +34 609 829 072</a>
-              </div>
+            <article class="card reveal contact-panel card-cta contact-assistant-card" style="padding:1.5rem;">
+              <h2>Book on WhatsApp</h2>
+              <p style="margin-top:0.8rem;">Share your dates and we will prepare the WhatsApp message in one click.</p>
+              <form class="stay-assistant-form stay-assistant-form--contact" data-stay-assistant data-lang="en" novalidate>
+                <div class="stay-assistant-grid stay-assistant-grid--contact">
+                  <div class="form-group">
+                    <label for="contact-checkin-en">Check-in date *</label>
+                    <input id="contact-checkin-en" name="checkin" type="date" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-checkout-en">Check-out date *</label>
+                    <input id="contact-checkout-en" name="checkout" type="date" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-guests-en">Number of guests</label>
+                    <input id="contact-guests-en" name="guests" type="number" min="1" step="1" inputmode="numeric" placeholder="E.g. 2" />
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-type-en">Stay type</label>
+                    <select id="contact-type-en" name="stayType">
+                      <option value="">I don't know</option>
+                      <option value="couple">Couple</option>
+                      <option value="family">Family</option>
+                      <option value="friends">Friends</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-apartment-en">Apartment</label>
+                    <select id="contact-apartment-en" name="apartment">
+                      <option value="">I don't know</option>
+                      <option value="Sol">Sol</option>
+                      <option value="Luna">Luna</option>
+                      <option value="Estrella">Estrella</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="stay-assistant-note">Nothing is sent from the website. We only open WhatsApp with this prepared message.</p>
+                <p class="assistant-feedback" data-assistant-feedback aria-live="polite"></p>
+                <div class="stay-assistant-actions card-actions card-actions--separated">
+                  <a
+                    class="btn btn-whatsapp stay-assistant-whatsapp"
+                    data-assistant-whatsapp
+                    href="https://wa.me/34609829072"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Open WhatsApp with this message</a>
+                </div>
+                <article class="stay-summary" data-assistant-summary hidden>
+                  <h3>Message preview</h3>
+                  <pre class="stay-preview-text" data-assistant-preview></pre>
+                </article>
+              </form>
             </article>
 
             <article class="card reveal contact-panel card-cta" style="padding:1.5rem;">
               <h2>Contact details</h2>
-              <div class="split-list" style="margin-top:0.9rem;">
-                <p><strong>Phones:</strong> <a href="tel:+34609829072" style="color:var(--primary);">+34 609 829 072</a> / <a href="tel:+34619820707" style="color:var(--primary);">+34 619 820 707</a></p>
-                <p><strong>Email:</strong> <a href="mailto:seomerce@hotmail.com" style="color:var(--primary);">seomerce@hotmail.com</a></p>
-                <p><strong>Address:</strong> Maril, 8 - Fiestras, 36548 Silleda (Pontevedra)</p>
-                <p><strong>GPS:</strong> 42.687801, -8.273509</p>
+              <div class="contact-details-list">
+                <div class="contact-detail-item">
+                  <span class="mono-icon mono-icon--lg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 16.92v2a2 2 0 0 1-2.18 2A19.78 19.78 0 0 1 3.1 4.18 2 2 0 0 1 5.08 2h2a2 2 0 0 1 2 1.72c.12.9.32 1.78.6 2.62a2 2 0 0 1-.45 2.11L8.1 9.58a16 16 0 0 0 6.32 6.32l1.13-1.13a2 2 0 0 1 2.11-.45c.84.28 1.72.48 2.62.6A2 2 0 0 1 22 16.92z"/></svg></span>
+                  <div class="contact-detail-text">
+                    <p class="contact-detail-label">Phones</p>
+                    <p><a href="tel:+34609829072">+34 609 829 072</a><br /><a href="tel:+34619820707">+34 619 820 707</a></p>
+                  </div>
+                </div>
+                <div class="contact-detail-item">
+                  <span class="mono-icon mono-icon--lg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg></span>
+                  <div class="contact-detail-text">
+                    <p class="contact-detail-label">Email</p>
+                    <p><a href="mailto:seomerce@hotmail.com">seomerce@hotmail.com</a></p>
+                  </div>
+                </div>
+                <div class="contact-detail-item">
+                  <span class="mono-icon mono-icon--lg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s7-5.5 7-12a7 7 0 1 0-14 0c0 6.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+                  <div class="contact-detail-text">
+                    <p class="contact-detail-label">Address</p>
+                    <p>Maril, 8 - Fiestras, 36548 Silleda (Pontevedra)</p>
+                  </div>
+                </div>
               </div>
               <div class="btn-center-wrap card-actions card-actions--separated card-actions--push">
-                <a class="btn btn-outline" href="https://maps.google.com/?q=42.687801,-8.273509" target="_blank" rel="noopener noreferrer">Open map</a>
+                <a class="btn btn-outline" href="tel:+34609829072">Call: +34 609 829 072</a>
                 <a class="btn btn-outline" href="mailto:seomerce@hotmail.com">Send email</a>
               </div>
             </article>
           </div>
 
-          <div class="container-custom grid-3" style="margin-bottom:2rem;">
-            <article class="card reveal" style="text-align:center;"><div class="card-icon" style="margin:0 auto 0.7rem;">1</div><h4 style="font-family:'DM Sans',sans-serif;">Message us</h4><p>Share dates and number of guests.</p></article>
-            <article class="card reveal" style="text-align:center;"><div class="card-icon" style="margin:0 auto 0.7rem;">2</div><h4 style="font-family:'DM Sans',sans-serif;">We suggest an option</h4><p>Sol, Luna or Estrella based on availability.</p></article>
-            <article class="card reveal" style="text-align:center;"><div class="card-icon" style="margin:0 auto 0.7rem;">3</div><h4 style="font-family:'DM Sans',sans-serif;">Direct confirmation</h4><p>Final confirmation through direct contact.</p></article>
+          <div class="container-custom" style="margin-bottom:1.2rem;">
+            <article class="card reveal location-showcase">
+              <div class="location-showcase__copy">
+                <h3>How to get here</h3>
+                <p>Maril, 8 - Fiestras, 36548 Silleda (Pontevedra)</p>
+                <div class="location-chips">
+                  <span class="location-chip"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16h16"/><path d="M8 16V8h8v8"/><path d="M12 8V5"/><path d="M9.5 5h5"/></svg></span>Santiago: ~30 min</span>
+                  <span class="location-chip"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16h16"/><path d="M8 16V8h8v8"/><path d="M12 8V5"/><path d="M9.5 5h5"/></svg></span>Ourense: ~40 min</span>
+                  <span class="location-chip"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16h16"/><path d="M8 16V8h8v8"/><path d="M12 8V5"/><path d="M9.5 5h5"/></svg></span>Pontevedra: ~60 min</span>
+                  <span class="location-chip"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16h16"/><path d="M8 16V8h8v8"/><path d="M12 8V5"/><path d="M9.5 5h5"/></svg></span>Lalín: ~15 min</span>
+                </div>
+                <div class="btn-center-wrap card-actions card-actions--separated location-actions">
+                  <a class="btn btn-maps" href="https://maps.google.com/?q=42.687801,-8.273509" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+                  <a class="btn btn-outline" href="/en/ubicacion/">See full location details</a>
+                </div>
+              </div>
+              <div class="location-showcase__map-wrap">
+                <iframe
+                  class="location-map-embed"
+                  title="Map of Los Tres Soles in Silleda"
+                  src="https://www.google.com/maps?q=42.687801,-8.273509&z=13&output=embed"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </article>
           </div>
 
-          <div class="container-custom grid-2" style="margin-bottom:2rem;">
-            <article class="card reveal card-cta" style="padding:1.4rem;">
-              <h3>How to get here</h3>
-              <div class="split-list" style="margin-top:0.7rem;">
-                <p>• Address: Maril, 8 - Fiestras, 36548 Silleda (Pontevedra)</p>
-                <p>• GPS coordinates: 42.687801, -8.273509</p>
-                <p>• Santiago de Compostela: around 30 min</p>
-                <p>• Ourense: around 40 min</p>
-                <p>• Pontevedra: around 60 min</p>
-                <p>• Lalín: around 15 min</p>
-              </div>
-              <div class="btn-center-wrap card-actions card-actions--separated card-actions--push">
-                <a class="btn btn-outline" href="https://maps.google.com/?q=42.687801,-8.273509" target="_blank" rel="noopener noreferrer">Open Google Maps</a>
-              </div>
-            </article>
-            <article class="card reveal" style="padding:1.4rem;">
-              <h3>Response time</h3>
-              <div class="split-list" style="margin-top:0.7rem;">
-                <p>• WhatsApp: usually very fast</p>
-                <p>• Phone: direct attention in regular hours</p>
-                <p>• Email: best for longer questions</p>
-              </div>
-            </article>
-          </div>
         </section>
 
         <section class="section-padding section-muted">
@@ -154,8 +211,9 @@
             <div class="section-head reveal" style="margin-bottom:1.4rem;"><h2>Frequently asked questions</h2></div>
             <div class="faq-list">
               <article class="card reveal"><h4 style="font-family:'DM Sans',sans-serif;">What are check-in and check-out times?</h4><p style="margin-top:0.4rem;">Check-in at 17:00 and check-out at 12:00.</p></article>
-              <article class="card reveal"><h4 style="font-family:'DM Sans',sans-serif;">Is there a minimum stay?</h4><p style="margin-top:0.4rem;">Yes, usually 2 nights. It may vary in high season or public holidays.</p></article>
+              <article class="card reveal"><h4 style="font-family:'DM Sans',sans-serif;">Is there a minimum stay?</h4><p style="margin-top:0.4rem;">Yes, the minimum stay is 2 nights.</p></article>
               <article class="card reveal"><h4 style="font-family:'DM Sans',sans-serif;">Are pets allowed?</h4><p style="margin-top:0.4rem;">No, pets are not allowed in the apartments.</p></article>
+              <article class="card reveal"><h4 style="font-family:'DM Sans',sans-serif;">How can I book and how fast do you reply?</h4><p style="margin-top:0.4rem;">By WhatsApp or phone. We usually reply very quickly.</p></article>
               <article class="card reveal"><h4 style="font-family:'DM Sans',sans-serif;">How do I get the final price?</h4><p style="margin-top:0.4rem;">We confirm it by WhatsApp or phone based on dates and available apartment.</p></article>
               <article class="card reveal"><h4 style="font-family:'DM Sans',sans-serif;">Which apartment is best for me?</h4><p style="margin-top:0.4rem;">We recommend Sol, Luna or Estrella according to guests and trip type.</p></article>
             </div>
