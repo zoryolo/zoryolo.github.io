@@ -90,74 +90,109 @@
           <div class="container-custom reveal">
             <h1>Apartamentos Sol, Luna y Estrella</h1>
             <p>
-              Tres opciones diferentes dentro de la misma finca. Cada apartamento tiene su propia galería de fotos,
-              distribución y características.
+              Tres opciones diferentes dentro de la misma finca. Cada apartamento tiene su propia distribución y
+              características.
             </p>
           </div>
         </section>
 
         <section class="section-padding">
-          <div class="container-custom grid-3" style="margin-bottom:2.4rem;">
-            <article class="card reveal" style="text-align:center;"><div class="card-icon" style="margin:0 auto 0.75rem;"><span class="mono-icon mono-icon--lg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M6 10.5V20h12v-9.5"/><path d="M10 20v-5h4v5"/></svg></span></div><h3>3 apartamentos</h3><p>Sol, Luna y Estrella</p></article>
-            <article class="card reveal" style="text-align:center;"><div class="card-icon" style="margin:0 auto 0.75rem;"><span class="mono-icon mono-icon--lg" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 7 9.2 5h5.6L16 7"/></svg></span></div><h3>Fotos reales</h3><p>Todas las imágenes son de la casa</p></article>
-            <article class="card reveal" style="text-align:center;"><div class="card-icon" style="margin:0 auto 0.75rem;"><span class="mono-icon mono-icon--lg" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M10 6h4"/><path d="M12 18h.01"/><path d="M9.5 13.5 12 11l2.5 2.5"/></svg></span></div><h3>Reserva directa</h3><p>WhatsApp o teléfono sin intermediarios</p></article>
-          </div>
-
           <div class="container-custom" style="display:grid; gap:2.5rem;">
-            <article class="card reveal" id="apartamento-sol" style="padding:1.4rem;">
-              <h2>Apartamento Sol</h2>
-              <p style="margin-top:0.6rem;">Una habitación doble + una habitación matrimonial, sala-comedor, cocina equipada, menaje, microondas, cafetera, cuna y trona para bebé y baño completo.</p>
+            <article class="card reveal apartment-collapsible" id="apartamento-sol" style="padding:1.4rem;">
+              <div class="apartment-collapsible__head">
+                <h2>Apartamento Sol</h2>
+                <button class="apartment-collapsible__toggle" type="button" data-apartment-toggle aria-expanded="true" aria-controls="apartamento-sol-content">
+                  <span data-apartment-toggle-label>Ocultar</span>
+                  <span class="apartment-collapsible__icon" data-apartment-toggle-icon aria-hidden="true">−</span>
+                </button>
+              </div>
+              <div id="apartamento-sol-content" data-apartment-content>
+              <p style="margin-top:0.6rem;">Apartamento de 40 m² con una habitación matrimonial, un sofá cama, cocina equipada, menaje, microondas, cafetera y baño completo.</p>
               <div class="pricing-list">
-                <p>• Perfil ideal: familias o parejas que quieren más espacio</p>
-                <p>• Tarifa orientativa: desde 85 € / noche</p>
-                <p>• Capacidad orientativa: consultar según composición del grupo</p>
+                <p>• Perfil ideal: parejas y familias pequeñas</p>
+                <p>• Tarifa: <span class="price-with-note">105 € / noche<button class="price-note-trigger" type="button" aria-label="Información sobre precio">*</button><span class="price-note-tooltip">El precio puede variar en temporada alta y puentes.</span></span></p>
+                <p>• Capacidad: 3 personas</p>
               </div>
               <div class="grid-2" style="margin-top:1rem;">
-                <div class="image-card" style="height:230px;"><img src="/images-web/sol1.jpg" alt="Apartamento Sol - estancia principal" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/sol2.jpg" alt="Apartamento Sol - zona interior" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/sol3.jpg" alt="Apartamento Sol - detalle interior" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/sol4.jpg" alt="Apartamento Sol - zona de descanso" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/exteriorsol1.png" alt="Apartamento Sol - exterior" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/sol1_habitacionmatrimonial.png" alt="Apartamento Sol - habitación matrimonial" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/sol5_habitacionmatrimonial.png" alt="Apartamento Sol - segunda vista de habitación matrimonial" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/sol2_cocina.png" alt="Apartamento Sol - cocina equipada" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/sol3_cocina.png" alt="Apartamento Sol - cocina equipada detalle" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/sol7_cocina.png" alt="Apartamento Sol - zona de cocina" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/sol8_cocina.png" alt="Apartamento Sol - cocina" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/sol4_baño.png" alt="Apartamento Sol - baño completo" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/sol6_baño.jpg" alt="Apartamento Sol - baño detalle" /></div>
               </div>
               <div class="btn-center-wrap card-actions card-actions--separated">
                 <a class="btn btn-whatsapp js-wa-apartment" data-apartment="Sol" href="https://wa.me/34609829072" target="_blank" rel="noopener noreferrer">Consultar Sol</a>
               </div>
+              </div>
             </article>
 
-            <article class="card reveal" id="apartamento-luna" style="padding:1.4rem;">
-              <h2>Apartamento Luna</h2>
-              <p style="margin-top:0.6rem;">Una habitación doble + una habitación matrimonial, sala-comedor, cocina equipada, menaje, microondas, cafetera, cuna y trona para bebé y baño completo.</p>
+            <article class="card reveal apartment-collapsible" id="apartamento-luna" style="padding:1.4rem;">
+              <div class="apartment-collapsible__head">
+                <h2>Apartamento Luna</h2>
+                <button class="apartment-collapsible__toggle" type="button" data-apartment-toggle aria-expanded="true" aria-controls="apartamento-luna-content">
+                  <span data-apartment-toggle-label>Ocultar</span>
+                  <span class="apartment-collapsible__icon" data-apartment-toggle-icon aria-hidden="true">−</span>
+                </button>
+              </div>
+              <div id="apartamento-luna-content" data-apartment-content>
+              <p style="margin-top:0.6rem;">Apartamento de 60 m² con dos habitaciones matrimoniales, dos sofás cama, sala-comedor, cocina equipada, menaje, microondas, cafetera y baño completo.</p>
               <div class="pricing-list">
-                <p>• Perfil ideal: estancias familiares con necesidad de cocina completa</p>
-                <p>• Tarifa orientativa: desde 100 € / noche</p>
-                <p>• Capacidad orientativa: consultar según composición del grupo</p>
+                <p>• Perfil ideal: familias</p>
+                <p>• Tarifa: <span class="price-with-note">135 € / noche<button class="price-note-trigger" type="button" aria-label="Información sobre precio">*</button><span class="price-note-tooltip">El precio puede variar en temporada alta y puentes.</span></span></p>
+                <p>• Capacidad: 6 personas</p>
               </div>
               <div class="grid-2" style="margin-top:1rem;">
-                <div class="image-card" style="height:230px;"><img src="/images-web/luna1.jpg" alt="Apartamento Luna - dormitorio" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/luna2.jpg" alt="Apartamento Luna - habitación doble" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/luna3.jpg" alt="Apartamento Luna - sala de estar" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/luna4.jpg" alt="Apartamento Luna - detalle interior" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/exteriorluna1.png" alt="Apartamento Luna - exterior 1" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/exteriorluna2.png" alt="Apartamento Luna - exterior 2" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/exteriorluna3.png" alt="Apartamento Luna - exterior 3" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/exteriorluna4.png" alt="Apartamento Luna - exterior 4" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/luna1_habitacionmatrimonial1.png" alt="Apartamento Luna - habitación matrimonial 1" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/luna2_habitacionmatrimonial2.jpg" alt="Apartamento Luna - habitación matrimonial 2" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/luna4_saladeestar.jpg" alt="Apartamento Luna - sala de estar 1" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/luna5_saladeestar.jpg" alt="Apartamento Luna - sala de estar 2" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/luna3_cocina.jpg" alt="Apartamento Luna - cocina equipada" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/luna6_baño.jpg" alt="Apartamento Luna - baño completo" /></div>
               </div>
               <div class="btn-center-wrap card-actions card-actions--separated">
                 <a class="btn btn-whatsapp js-wa-apartment" data-apartment="Luna" href="https://wa.me/34609829072" target="_blank" rel="noopener noreferrer">Consultar Luna</a>
               </div>
+              </div>
             </article>
 
-            <article class="card reveal" id="apartamento-estrella" style="padding:1.4rem;">
-              <h2>Apartamento Estrella</h2>
+            <article class="card reveal apartment-collapsible" id="apartamento-estrella" style="padding:1.4rem;">
+              <div class="apartment-collapsible__head">
+                <h2>Apartamento Estrella</h2>
+                <button class="apartment-collapsible__toggle" type="button" data-apartment-toggle aria-expanded="true" aria-controls="apartamento-estrella-content">
+                  <span data-apartment-toggle-label>Ocultar</span>
+                  <span class="apartment-collapsible__icon" data-apartment-toggle-icon aria-hidden="true">−</span>
+                </button>
+              </div>
+              <div id="apartamento-estrella-content" data-apartment-content>
               <p style="margin-top:0.6rem;">Apartamento de 44 m² en planta baja, con una habitación con cama de 150, salón con dos sofás-cama y cocina equipada.</p>
               <div class="pricing-list">
-                <p>• Perfil ideal: parejas, escapada tranquila o familia pequeña</p>
-                <p>• Tarifa orientativa: desde 85 € / noche</p>
-                <p>• Capacidad orientativa: consultar según composición del grupo</p>
+                <p>• Perfil ideal: parejas y familias pequeñas</p>
+                <p>• Tarifa: <span class="price-with-note">115 € / noche<button class="price-note-trigger" type="button" aria-label="Información sobre precio">*</button><span class="price-note-tooltip">El precio puede variar en temporada alta y puentes.</span></span></p>
+                <p>• Capacidad: 4 personas</p>
               </div>
               <div class="grid-2" style="margin-top:1rem;">
-                <div class="image-card" style="height:230px;"><img src="/images-web/estrella1.jpg" alt="Apartamento Estrella - estancia" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/estrella2.jpg" alt="Apartamento Estrella - dormitorio" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/estrella3.jpg" alt="Apartamento Estrella - salón" /></div>
-                <div class="image-card" style="height:230px;"><img src="/images-web/estrella4.jpg" alt="Apartamento Estrella - cocina equipada" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/exteriorestrella1.png" alt="Apartamento Estrella - exterior" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella_habitacionmatrimonial.jpg" alt="Apartamento Estrella - habitación matrimonial" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella5_habitacionmatrimonial.jpg" alt="Apartamento Estrella - segunda vista de habitación matrimonial" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella1_saladeestar.jpg" alt="Apartamento Estrella - sala de estar 1" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella2_saladeestar.jpg" alt="Apartamento Estrella - sala de estar 2" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella3_saladeestar.jpg" alt="Apartamento Estrella - sala de estar 3" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella4_saladeestar.jpg" alt="Apartamento Estrella - sala de estar 4" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella6_baño.jpg" alt="Apartamento Estrella - baño 1" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella7_baño.jpg" alt="Apartamento Estrella - baño 2" /></div>
+                <div class="image-card" style="height:230px;"><img src="/images-web/estrella8_baño.png" alt="Apartamento Estrella - baño 3" /></div>
               </div>
               <div class="btn-center-wrap card-actions card-actions--separated">
                 <a class="btn btn-whatsapp js-wa-apartment" data-apartment="Estrella" href="https://wa.me/34609829072" target="_blank" rel="noopener noreferrer">Consultar Estrella</a>
+              </div>
               </div>
             </article>
           </div>
@@ -165,38 +200,15 @@
 
         <section class="section-padding section-muted">
           <div class="container-custom reveal section-head">
-            <h2>Servicios comunes incluidos</h2>
-            <p>Condiciones y equipamiento válidos para los tres apartamentos</p>
+            <h2>Condiciones de estancia</h2>
+            <p>Normas, horarios y condiciones de reserva aplicables</p>
           </div>
           <div class="container-custom amenities-full">
-            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c2 3 4 4.5 4 7.5A4 4 0 0 1 8 11c0-2.5 1.3-4.3 4-8Z"/><path d="M12 11c1.4 1.4 2.2 2.6 2.2 4a2.2 2.2 0 1 1-4.4 0c0-1 .5-2 2.2-4Z"/></svg></span></div><div><h4>Calefacción</h4><p>Confort durante todo el año</p></div></article>
-            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span></div><div><h4>Televisión</h4><p>Disponible en los apartamentos</p></div></article>
-            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 15h16l-2-8H8l-4 8Z"/><path d="M8 7h4"/></svg></span></div><div><h4>Lavadora y plancha</h4><p>Cuarto de servicio anexo común</p></div></article>
-            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M10 17V7h4a3 3 0 1 1 0 6h-4"/></svg></span></div><div><h4>Parking</h4><p>Zona de aparcamiento en la propiedad</p></div></article>
-            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.5"/><circle cx="12" cy="6.5" r="1.5"/><circle cx="16" cy="8" r="1.5"/><path d="M9 15c0-2 1.5-3.5 3-3.5s3 1.5 3 3.5c0 1.4-1.1 2.5-2.5 2.5h-1C10.1 17.5 9 16.4 9 15Z"/><path d="M5 19 19 5"/></svg></span></div><div><h4>No se admiten animales</h4><p>Norma general de la casa</p></div></article>
-          </div>
-        </section>
-
-        <section class="section-padding">
-          <div class="container-custom grid-2">
-            <article class="card reveal" style="padding:1.6rem;">
-              <h3>Normas y horarios</h3>
-              <div class="split-list" style="margin-top:0.8rem;">
-                <p>• Check-in: 17:00 h</p>
-                <p>• Check-out: 12:00 h</p>
-                <p>• Estancia mínima habitual: 2 noches</p>
-                <p>• Temporada alta y puentes: consultar</p>
-              </div>
-            </article>
-            <article class="card reveal" style="padding:1.6rem;">
-              <h3>¿Qué incluir en tu mensaje?</h3>
-              <div class="split-list" style="margin-top:0.8rem;">
-                <p>• Fechas exactas</p>
-                <p>• Número de personas (adultos/niños)</p>
-                <p>• Preferencia: Sol, Luna o Estrella</p>
-                <p>• Dudas sobre equipamiento o rutas</p>
-              </div>
-            </article>
+            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 4h8l-3 6v6h-2V10L8 4Z"/><path d="M6 6h12"/><path d="M5 5 19 19"/></svg></span></div><div><h4>No se admiten fiestas</h4><p>Norma de convivencia obligatoria en toda la finca.</p></div></article>
+            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="1.2"/><circle cx="12" cy="6.5" r="1.2"/><circle cx="16" cy="8" r="1.2"/><path d="M9 14c1.2-1 4.8-1 6 0 .8.7 1 2.2.2 3.1-.8.9-2 .9-3.2.9s-2.4 0-3.2-.9c-.8-.9-.6-2.4.2-3.1Z"/><path d="M5 5 19 19"/></svg></span></div><div><h4>No se admiten animales</h4><p>Actualmente no se aceptan mascotas en los apartamentos.</p></div></article>
+            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h8"/></svg></span></div><div><h4>Horarios</h4><p>Check-in: 17:00 h · Check-out: 12:00 h.</p></div></article>
+            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="M9 15h6"/></svg></span></div><div><h4>Estancia mínima</h4><p>La estancia mínima es de 2 noches.</p></div></article>
+            <article class="amenity-full reveal"><div class="icon-round"><span class="mono-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 16h16"/><path d="M8 16V8h8v8"/><path d="M12 8V5"/><path d="M9.5 5h5"/></svg></span></div><div><h4>Precios y temporada</h4><p>Los precios pueden variar en temporada alta y puentes; consultar condiciones.</p></div></article>
           </div>
         </section>
 

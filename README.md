@@ -24,10 +24,12 @@ Proyecto estático listo para publicar en hosting sin build (GitHub Pages, Netli
 - Interacción ligera: `assets/js/app.js`
   - menú móvil
   - animaciones de entrada
-  - carrusel en inicio
+  - carrusel principal de portada (imágenes)
+  - carrusel propio de reseñas Google Maps (sin widget embebido)
   - lightbox global y zoom en imágenes
   - barra CTA fija en móvil (WhatsApp / Llamar)
   - navegación y acciones CTA directas (WhatsApp/teléfono)
+  - asistente de estancia con validación al enviar (sin error visible por defecto)
 - SEO local base:
   - metadatos OG/canonical en páginas principales
   - `hreflang` ES/EN en páginas de captación
@@ -41,6 +43,20 @@ Proyecto estático listo para publicar en hosting sin build (GitHub Pages, Netli
   - ubicación real en Silleda (Pontevedra)
   - apartamentos Sol, Luna y Estrella
   - servicios, contacto, GPS y legales
+  - reseñas reales seleccionadas manualmente (fuente Google Maps)
+
+## Estado legal y cookies
+
+- Privacidad reforzada en ES/EN con secciones de:
+  - categorías de datos
+  - base jurídica y conservación
+  - destinatarios y transferencias internacionales
+  - derechos + reclamación ante AEPD
+  - carácter de los datos y seguridad
+- Política de cookies ajustada al estado actual:
+  - no se declaran cookies no técnicas activas
+  - no hay banner/CMP porque no hay cookies de analítica/publicidad activas
+  - si se añaden en el futuro, debe incorporarse consentimiento previo
 
 ## Ejecución local
 
