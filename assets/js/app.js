@@ -703,20 +703,20 @@
 
     const exteriorFilenames = [
       "exterior1.jpg",
-      "exterior2.png",
-      "exterior3.png",
+      "exterior2.jpg",
+      "exterior3.jpg",
       "exterior4.jpeg",
-      "exterior5.png",
+      "exterior5.jpg",
       "exterior6.jpg",
       "exterior8.jpg",
       "exterior11.jpg",
       "exterior12.jpg",
-      "exteriorestrella1.png",
-      "exteriorluna1.png",
-      "exteriorluna2.png",
-      "exteriorluna3.png",
-      "exteriorluna4.png",
-      "exteriorsol1.png"
+      "exteriorestrella1.jpg",
+      "exteriorluna1.jpg",
+      "exteriorluna2.jpg",
+      "exteriorluna3.jpg",
+      "exteriorluna4.jpg",
+      "exteriorsol1.jpg"
     ];
 
     const items = exteriorFilenames.map((filename, idx) => ({
@@ -1378,10 +1378,14 @@
       if (!galleryItems.length) return;
       currentIndex = (index + galleryItems.length) % galleryItems.length;
       const current = galleryItems[currentIndex];
+      const hasCategory = current.category.trim().length > 0;
+      const hasCaption = current.caption.trim().length > 0;
       img.src = current.full;
       img.alt = current.alt;
       tag.textContent = current.category;
       text.textContent = current.caption;
+      tag.hidden = !hasCategory;
+      text.hidden = !hasCaption;
       counter.textContent = `${currentIndex + 1} / ${galleryItems.length}`;
       prevBtn.hidden = galleryItems.length <= 1;
       nextBtn.hidden = galleryItems.length <= 1;
