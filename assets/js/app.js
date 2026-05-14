@@ -705,12 +705,13 @@
       "exterior1.jpg",
       "exterior2.jpg",
       "exterior3.jpg",
-      "exterior4.jpeg",
+      "exterior4.jpg",
       "exterior5.jpg",
       "exterior6.jpg",
+      "exterior7.jpg",
       "exterior8.jpg",
-      "exterior11.jpg",
-      "exterior12.jpg",
+      "exterior9.jpg",
+      "exterior10.jpg",
       "exteriorestrella1.jpg",
       "exteriorluna1.jpg",
       "exteriorluna2.jpg",
@@ -719,8 +720,9 @@
       "exteriorsol1.jpg"
     ];
 
+    const carouselImageVersion = "20260514-1";
     const items = exteriorFilenames.map((filename, idx) => ({
-      url: `/images-web/${filename}`,
+      url: `/images-web/${filename}?v=${carouselImageVersion}`,
       alt: isEnglish
         ? `Exterior photo ${idx + 1} of Los Tres Soles`
         : `Foto exterior ${idx + 1} de Los Tres Soles`
