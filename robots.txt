@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zoryolo.github.io/sitemap.xml
+Sitemap: https://lostressoles.es/sitemap.xml
