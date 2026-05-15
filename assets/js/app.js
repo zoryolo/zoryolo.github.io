@@ -25,6 +25,7 @@
   const mobileBackdrop = document.getElementById("mobile-backdrop");
   const siteHeader = document.querySelector(".site-header");
   const isHomePage = document.body.dataset.page === "home";
+  const imageCacheVersion = "20260514-1";
   const whatsappNumber = "34609829072";
   const reviewCatalog = {
     es: [
@@ -720,9 +721,8 @@
       "exteriorsol1.jpg"
     ];
 
-    const carouselImageVersion = "20260514-1";
     const items = exteriorFilenames.map((filename, idx) => ({
-      url: `/images-web/${filename}?v=${carouselImageVersion}`,
+      url: `/images-web/${filename}?v=${imageCacheVersion}`,
       alt: isEnglish
         ? `Exterior photo ${idx + 1} of Los Tres Soles`
         : `Foto exterior ${idx + 1} de Los Tres Soles`
@@ -960,6 +960,32 @@
         forceShow: true
       });
       pauseAutoplay();
+    });
+  }
+
+  function appendImageVersion(url, version) {
+    if (!url || !version) return url;
+    if (!url.startsWith("/images-web/")) return url;
+    if (url.includes("://")) return url;
+    const [path, hash = ""] = url.split("#");
+    const [basePath, query = ""] = path.split("?");
+    const params = new URLSearchParams(query);
+    params.set("v", version);
+    const serialized = params.toString();
+    return `${basePath}${serialized ? `?${serialized}` : ""}${hash ? `#${hash}` : ""}`;
+  }
+
+  function initLocationGalleryImageVersioning() {
+    if (document.body.dataset.page !== "ubicacion") return;
+    const locationImages = document.querySelectorAll(".itinerary-grid .image-card img[src^=\"/images-web/\"]");
+    if (!locationImages.length) return;
+
+    locationImages.forEach((img) => {
+      const currentSrc = img.getAttribute("src");
+      const nextSrc = appendImageVersion(currentSrc, imageCacheVersion);
+      if (nextSrc && nextSrc !== currentSrc) {
+        img.setAttribute("src", nextSrc);
+      }
     });
   }
 
@@ -1469,6 +1495,7 @@
   }
 
   initHomeCarousel();
+  initLocationGalleryImageVersioning();
   initReviewsCarousel();
   initGalleryLightbox();
   initGlobalImageLightbox();
