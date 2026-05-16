@@ -1,86 +1,62 @@
-# Los Tres Soles · Web estática (HTML/CSS/JS)
+# Los Tres Soles · Sitio web oficial
 
-Proyecto estático listo para publicar en hosting sin build (GitHub Pages, Netlify estático, servidor simple).
+Sitio web estático desarrollado para **Los Tres Soles**, alojamiento rural ubicado en Silleda, Pontevedra.
 
-## Qué incluye
+La web está construida con HTML, CSS y JavaScript, sin CMS ni dependencias de backend. Está preparada para publicarse en hosting estático como GitHub Pages, Netlify o un servidor web tradicional.
 
-- Sitio multipágina en HTML puro:
-  - `index.html`
-  - `sobre-la-casa/index.html`
-  - `galeria/index.html`
-  - `ubicacion/index.html`
-  - `contacto/index.html`
-  - `en/index.html`
-  - `en/sobre-la-casa/index.html`
-  - `en/galeria/index.html`
-  - `en/ubicacion/index.html`
-  - `en/contacto/index.html`
-  - `en/privacidad/index.html`
-  - `en/terminos/index.html`
-  - `privacidad/index.html`
-  - `terminos/index.html`
-  - `404.html`
-- Estilos globales: `assets/css/styles.css`
-- Interacción ligera: `assets/js/app.js`
-  - menú móvil
-  - animaciones de entrada
-  - carrusel principal de portada (imágenes)
-  - carrusel propio de reseñas Google Maps (sin widget embebido)
-  - lightbox global y zoom en imágenes
-  - barra CTA fija en móvil (WhatsApp / Llamar)
-  - navegación y acciones CTA directas (WhatsApp/teléfono)
-  - asistente de estancia con validación al enviar (sin error visible por defecto)
-- SEO local base:
-  - metadatos OG/canonical en páginas principales
-  - `hreflang` ES/EN en páginas de captación
-  - `schema.org/LodgingBusiness` en portada
-- Imágenes en `images-web/`.
+## Características principales
 
-## Fuentes de contenido
+- Sitio multipágina en español e inglés.
+- Diseño responsive adaptado a móvil, tablet y escritorio.
+- Páginas principales:
+  - Inicio
+  - Apartamentos
+  - Galería
+  - Ubicación
+  - Contacto
+  - Privacidad
+  - Aviso legal
+- Integración de llamadas a la acción mediante WhatsApp, teléfono y email.
+- Galería de imágenes con lightbox.
+- SEO local básico mediante metadatos, Open Graph, canonical, hreflang y datos estructurados.
+- Código estático, ligero y fácil de mantener.
 
-- Textos base reales: `content/lostressoles_texto/`
-- Se han integrado y adaptado para copy web actual:
-  - ubicación real en Silleda (Pontevedra)
-  - apartamentos Sol, Luna y Estrella
-  - servicios, contacto, GPS y legales
-  - reseñas reales seleccionadas manualmente (fuente Google Maps)
+## Estructura general
 
-## Estado legal y cookies
-
-- Privacidad reforzada en ES/EN con secciones de:
-  - categorías de datos
-  - base jurídica y conservación
-  - destinatarios y transferencias internacionales
-  - derechos + reclamación ante AEPD
-  - carácter de los datos y seguridad
-- Política de cookies ajustada al estado actual:
-  - no se declaran cookies no técnicas activas
-  - no hay banner/CMP porque no hay cookies de analítica/publicidad activas
-  - si se añaden en el futuro, debe incorporarse consentimiento previo
+```text
+/
+├── index.html
+├── sobre-la-casa/
+├── galeria/
+├── ubicacion/
+├── contacto/
+├── privacidad/
+├── terminos/
+├── en/
+├── assets/
+│   ├── css/
+│   └── js/
+├── images-web/
+└── 404.html
+```
 
 ## Ejecución local
 
-No requiere instalación. Sirve la carpeta como estática:
+No requiere instalación ni proceso de build.
+
+Para probarlo en local:
 
 ```bash
-npx serve static-replica
+npx serve .
 ```
 
-Después abre la URL local que te muestre `serve`.
+Después abre en el navegador la URL local que indique el comando.
 
-## Nota de idioma
+## Idiomas
 
-- Español: rutas raíz (`/`, `/sobre-la-casa/`, etc.)
-- Inglés: rutas bajo `/en/` (`/en/`, `/en/contacto/`, etc.)
+- Español: rutas principales del sitio.
+- Inglés: rutas bajo `/en/`.
 
-## Documentación para agentes AI
+## Mantenimiento
 
-- Punto de entrada: `agents.md`
-- Guías detalladas: carpeta `docs/`
-  - `docs/00-PROYECTO-CONTEXTO.md`
-  - `docs/01-ARQUITECTURA.md`
-  - `docs/02-CONTENIDO-Y-COPY.md`
-  - `docs/03-I18N-Y-RUTAS.md`
-  - `docs/04-UX-Y-COMPONENTES.md`
-  - `docs/05-QA-Y-OPERACION.md`
-  - `docs/06-PLAYBOOK-CAMBIOS.md`
+El sitio está diseñado para permitir cambios sencillos en textos, imágenes, enlaces de contacto y contenido de las páginas sin depender de un CMS.
