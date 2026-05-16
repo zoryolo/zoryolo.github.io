@@ -1,4 +1,4 @@
-PAQUETE TRANSPARENTE - LAS TRES SOLES
+PAQUETE TRANSPARENTE - LOS TRES SOLES
 
 Este paquete corrige el problema del fondo.
 
