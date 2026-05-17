@@ -118,6 +118,14 @@ body[data-page='sobre'] main > section.section-padding + section.section-padding
   border-top: 1px solid color-mix(in srgb, var(--border) 82%, #fff 18%);
 }
 
+body[data-page='contacto'] main > section.section-padding + section.section-padding {
+  border-top: 1px solid color-mix(in srgb, var(--border) 82%, #fff 18%);
+}
+
+body[data-page='ubicacion'] main > section.section-padding + section.section-padding {
+  border-top: 1px solid color-mix(in srgb, var(--border) 82%, #fff 18%);
+}
+
 body[data-page='home'] .site-footer {
   border-top: 1px solid color-mix(in srgb, var(--border) 82%, #fff 18%);
 }
